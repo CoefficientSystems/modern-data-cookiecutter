@@ -21,8 +21,8 @@ cookiecutter https://github.com/CoefficientSystems/coefficient-cookiecutter
 ## Contributing
 
 This cookiecutter project is self-referential (!) and conforms to the guidelines outlined in the
-generated cookiecutter documentation. Please refer to [{{cookiecutter.project_slug}}/README.md] for
-advice on how to contribute.
+generated cookiecutter documentation. Please refer to [{{cookiecutter.repo_name}}/README.md] and
+[{{cookiecutter.repo_name}}/docs/] for advice on how to contribute.
 
 
 ## Manual test
@@ -43,6 +43,12 @@ poetry install --no-root --remove-untracked
 
 # Run tests
 pytest
+
+# Test towncrier (if installed)
+towncrier create 123.added --edit
+# Write something, save, close
+towncrier build --version=0.2
+# Confirm your update is now in CHANGELOG.md
 
 # Clean up
 deactivate
