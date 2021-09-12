@@ -8,8 +8,8 @@
 ## Usage
 
 ```bash
-# Install Python/pip/virtualenv/etc
-pip install cookiecutter
+# Install cookiecutter
+pipx install cookiecutter
 
 # Install from local
 cookiecutter /path/to/coefficient-cookiecutter/
@@ -18,70 +18,35 @@ cookiecutter /path/to/coefficient-cookiecutter/
 cookiecutter https://github.com/CoefficientSystems/coefficient-cookiecutter
 ```
 
-
----
-
 ## Contributing
-### Project cheatsheet
 
-  - **poetry sync:** `poetry install --no-root --remove-untracked`
+This cookiecutter project is self-referential (!) and conforms to the guidelines outlined in the
+generated cookiecutter documentation. Please refer to [{{cookiecutter.project_slug}}/README.md] for
+advice on how to contribute.
 
-### Initial project setup
 
-See `docs/getting_started.md` for how to get up & running.
-
-### Updating Python requirements using Poetry
-
-This project uses Poetry to manage dependencies:
-[https://python-poetry.org/docs/](https://python-poetry.org/docs/)
-
-The Poetry virtualenv should activate automatically if you are using
-[zsh-autoswitch-virtualenv](https://github.com/MichaelAquilina/zsh-autoswitch-virtualenv). You can
-also activate it manually by running `workon dp-security` (preferred) or `poetry shell` (Poetry
-created/managed virtualenv).
-
-#### Poetry tl;dr
+## Manual test
 
 ```bash
-# Sync your environment with poetry.lock
+pipx install cookiecutter
+cookiecutter /path/to/coefficient-cookiecutter/
+# Use project defaults
+cd coefficient-project
+
+# Install Python & dependencies
+pyenv shell $(cat .python-version)
+python -V  # check this is the correct version of Python
+mkvirtualenv $(cat .venv)
+python -V  # check this is the correct version of Python
+python -m pip install --upgrade pip
 poetry install --no-root --remove-untracked
 
-# Add and install a new package into your environment (or update an existing one)
-# 1. Add a package to pyproject.toml
-# 2. Run this
-poetry add package@version
+# Run tests
+pytest
 
-# N.B. We lock & export to requirements when you run `pre-commit run --all-files` so you
-# shouldn't need to run the commands below yourself.
-
-# Compile all poetry.lock file
-poetry update
-
-# Export to requirements.txt (this is for compatibility with team members who may not
-# have Poetry; Poetry itself uses poetry.lock when you run `poetry install`)
-poetry export -f requirements.txt --output requirements.txt
+# Clean up
+deactivate
+rmvirtualenv $(cat .venv)
+cd ..
+rm -r ./coefficient-project
 ```
-
-#### Poetry FAQ
-
-**How do I sync my environment with the latest `poetry.lock`?**
-To install dependencies, simply `cd backend-security` and run `poetry install --no-root --remove-untracked`.
-This will resolve & install all deps in `pyproject.toml` via `poetry.lock`. Options:
-  - `--no-root` skips installing the repo itself as a Python package
-  - `--remove-untracked` removes old dependencies no longer present in the lock file
-
-You may wish to set an alias e.g. `alias poetry-sync='poetry install --no-root --remove-untracked'`
-
-**How do I add/change packages?**
-In order to install a new package or remove an old one, please edit `pyproject.toml`
-or use either `poetry add package` or `pipx run poetry add package@version` as desired.
-
-**How do I update `poetry.lock` to match new changes in `pyproject.toml`?**
-You can run `poetry update`, although this will also get run when you run pre-commit. This fetches
-the latest matching versions (according to `pyproject.toml`) and updates `poetry.lock`, and is
-equivalent to deleting `poetry.lock` and running `poetry install --no-root` again from scratch.
-
-**What do `~`, `^` and `*` mean?**
-Check out the Poetry docs page for [specifying version constraints](https://python-poetry.org/docs/dependency-specification/#version-constraints).
-Environment markers are great, e.g. this means "for Python 2.7.* OR Windows, install pathlib2 >=2.2, <3.0"
-`pathlib2 = { version = "^2.2", markers = "python_version ~= '2.7' or sys_platform == 'win32'" }`

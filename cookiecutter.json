@@ -1,5 +1,11 @@
 {
-    "directory_name": "Hello",
-    "file_name": "Howdy",
-    "greeting_recipient": "Julie"
+    "full_name": "John Sandall",
+    "email": "john@example.com",
+    "project_name": "Coefficient Project",
+    "project_short_description": "This project is going to change the world.",
+    "repo_name": "{{ cookiecutter.project_name.lower().replace(' ', '-') }}",
+    "package_name": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
+    "virtualenv": "{{ cookiecutter.project_name.lower().replace(' ', '-') }}",
+    "python_version": "3.9.7",
+    "version": "0.1.0"
 }
