@@ -58,9 +58,11 @@ Test everything is working by opening a new shell (e.g. new Terminal window):
 pyenv shell $(cat .python-version)
 # This only needs to be run once after installing a new Python version through pyenv
 # in order to initialise virtualenvwrapper for this Python version
+python -m pip install --upgrade pip
+python -m pip install virtualenvwrapper
 pyenv virtualenvwrapper_lazy
 
-# Create test virtualenv
+# Create test virtualenv (if this doesn't work, try sourcing ~/.zshrc or opening new shell)
 mkvirtualenv venv_test
 which python
 python -V
@@ -72,6 +74,8 @@ rmvirtualenv venv_test
 
 
 ## 3. Get the repo & initialise the repo environment
+
+⚠️ N.B. You should replace `REPO_GIT_URL` here with your actual URL to your GitHub repo.
 
 ```sh
 git clone ${REPO_GIT_URL}
