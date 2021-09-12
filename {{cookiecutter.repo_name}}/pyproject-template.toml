@@ -1,8 +1,21 @@
+###########
+# 📜 Poetry
+###########
+
 [tool.poetry]
 name = "{{ cookiecutter.package_name }}"
 version = "{{ cookiecutter.version }}"
 description = "{{ cookiecutter.project_short_description }}"
 authors = ["{{ cookiecutter.full_name.replace('\"', '\\\"') }} <{{ cookiecutter.email }}"]
+license = "UNLICENSED"
+classifiers = [
+    "Private :: Do Not Upload"
+]
+packages = [
+    { include = "{{ cookiecutter.package_name }}", from = "{{ cookiecutter.package_name }}" },
+    # Add more packages here, e.g.
+    # { include = "module_name", from = "{{ cookiecutter.package_name }}" },
+]
 
 [tool.poetry.dependencies]
 python = "^{{ cookiecutter.python_version }}"
@@ -10,6 +23,7 @@ python = "^{{ cookiecutter.python_version }}"
 [tool.poetry.dev-dependencies]
 black = "^21.8b0"
 flake8 = "^3.9.2"
+isort = "^5.9.3"
 pylint = "^2.10.2"
 pytest = "^5.2"
 {% if cookiecutter.use_towncrier == 'y' -%}
@@ -18,6 +32,48 @@ towncrier = "^21.3.0"{% endif %}
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+
+############
+# ✅ Linters
+############
+
+[tool.black]
+line-length = {{ cookiecutter.line_length }}
+target-version = ["{{ "".join(cookiecutter.python_version.split('.')[:2]) }}"]
+
+[tool.isort]
+profile = "black"
+line_length = {{ cookiecutter.line_length }}
+default_section = "THIRDPARTY"
+known_first_party = ["{{ cookiecutter.package_name }}"]
+sections = "FUTURE,STDLIB,THIRDPARTY,FIRSTPARTY,LOCALFOLDER"
+add_imports="from __future__ import annotations"
+
+[tool.pylint.MASTER]
+ignore-paths = [".git"]
+load-plugins = []
+
+[tool.pylint."MESSAGES CONTROL"]
+enable="all"
+max-module-lines = 2000
+max-line-length = {{ cookiecutter.line_length }}
+max-locals = 50
+min-similarity-lines = 150
+max-statements = 89
+max-args = 22
+max-branches = 17
+good-names = [
+]
+disable = [
+    # "missing-module-docstring",  # example
+]
+logging-format-style="new"
+
+
+##############
+# 📣 Towncrier
+##############
 
 {% if cookiecutter.use_towncrier == 'y' -%}
 [tool.towncrier]

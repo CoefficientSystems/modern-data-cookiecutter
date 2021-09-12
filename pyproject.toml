@@ -1,8 +1,19 @@
+# 🚨 THIS IS THE COEFFICIENT-COOKIECUTTER pyproject.toml — please double check you want to edit
+# this file and not {{cookiecutter.package_name}}/pyproject.toml
+
+###########
+# 📜 Poetry
+###########
+
 [tool.poetry]
 name = "coefficient-cookiecutter"
 version = "0.1.0"
 description = ""
 authors = ["John Sandall <contact@coefficient.ai>"]
+license = "UNLICENSED"
+classifiers = [
+    "Private :: Do Not Upload"
+]
 
 [tool.poetry.dependencies]
 python = "^3.8"
@@ -11,6 +22,7 @@ cookiecutter = "^1.7.3"
 [tool.poetry.dev-dependencies]
 black = "^21.8b0"
 flake8 = "^3.9.2"
+isort = "^5.9.3"
 pylint = "^2.10.2"
 pytest = "^5.2"
 towncrier = "^21.3.0"
@@ -18,6 +30,45 @@ towncrier = "^21.3.0"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+
+############
+# ✅ Linters
+############
+
+[tool.black]
+line-length = 100
+target-version = ['py39']
+
+[tool.isort]
+profile = "black"
+line_length = 100
+default_section = "THIRDPARTY"
+sections = "FUTURE,STDLIB,THIRDPARTY,FIRSTPARTY,LOCALFOLDER"
+add_imports="from __future__ import annotations"
+
+
+[tool.pylint.MASTER]
+ignore-paths = [".git"]
+load-plugins = []
+
+[tool.pylint."MESSAGES CONTROL"]
+enable="all"
+max-module-lines = 2000
+max-line-length = 100
+max-locals = 50
+min-similarity-lines = 150
+max-statements = 89
+max-args = 22
+max-branches = 17
+good-names = []
+disable = []
+logging-format-style="new"
+
+
+##############
+# 📣 Towncrier
+##############
 
 [tool.towncrier]
 filename = "CHANGELOG.md"
