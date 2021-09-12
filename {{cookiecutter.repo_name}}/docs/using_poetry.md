@@ -5,7 +5,7 @@ This project uses Poetry to manage dependencies:
 
 The Poetry virtualenv should activate automatically if you are using
 [zsh-autoswitch-virtualenv](https://github.com/MichaelAquilina/zsh-autoswitch-virtualenv). You can
-also activate it manually by running `workon dp-security` (preferred) or `poetry shell` (Poetry
+also activate it manually by running `workon {{ cookiecutter.virtualenv }}` (preferred) or `poetry shell` (Poetry
 created/managed virtualenv).
 
 

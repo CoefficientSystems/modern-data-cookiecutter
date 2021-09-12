@@ -8,6 +8,7 @@
     "virtualenv": "{{ cookiecutter.project_name.lower().replace(' ', '-') }}",
     "python_version": "3.9.7",
     "version": "0.1.0",
+    "line_length": "100",
     "use_towncrier": "y",
     "issue_url": "https: //gitlab.com/username/repo/-/issues/",
     "_copy_without_render": [
