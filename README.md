@@ -44,15 +44,22 @@ poetry install --no-root --remove-untracked
 # Run tests
 pytest
 
+# Towncrier & pre-commit require us to be in a repo
+git init
+
 # Test towncrier (if installed)
 towncrier create 123.added --edit
 # Write something, save, close
 towncrier build --version=0.2
 # Confirm your update is now in CHANGELOG.md
 
+# Test out pre-commit
+pre-commit run --all-files --hook-stage=manual --show-diff-on-failure
+
 # Clean up
 deactivate
 rmvirtualenv $(cat .venv)
+rm -rf ./.git/
 cd ..
 rm -r ./coefficient-project
 ```
