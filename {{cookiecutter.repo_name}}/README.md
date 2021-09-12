@@ -4,6 +4,9 @@
 
 ## Project cheatsheet
 
+  - **pre-commit:** `pre-commit run --all-files`
+  - **pytest:** `pytest` or `pytest -s`
+  - **coverage:** `coverage run -m pytest` or `coverage html`
   - **poetry sync:** `poetry install --no-root --remove-untracked`
 {% if cookiecutter.use_towncrier == 'y' -%}
   - **create towncrier entry:** `towncrier create 123.added --edit`{% endif %}
