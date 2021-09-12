@@ -4,9 +4,9 @@
 *.pyc
 
 # Data
-data
-!data/README.md
-!data/**/*.gitkeep
+./data/
+!**/data/**/README.md
+!**/data/**/*.gitkeep
 
 # Secrets
 .env
@@ -42,7 +42,6 @@ ignore/
 *.pem
 
 # Editor
-tags
 pyrightconfig.json
 
 # https://www.gitignore.io/

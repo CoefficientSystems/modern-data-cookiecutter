@@ -1,15 +1,6 @@
 #  Caches
-**/.ipynb_checkpoints/*
 **/__pycache__/*
 *.pyc
-
-# Data
-data
-!data/README.md
-!data/**/*.gitkeep
-
-# Secrets
-.env
 
 # Personal TODO files
 TODO.txt
@@ -20,7 +11,6 @@ TODO.txt
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-.RData
 
 # Environment
 venv/
@@ -42,7 +32,6 @@ ignore/
 *.pem
 
 # Editor
-tags
 pyrightconfig.json
 
 # https://www.gitignore.io/
