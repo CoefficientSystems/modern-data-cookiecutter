@@ -1,5 +1,12 @@
-from coefficient_cookiecutter import __version__
+"""Barely functional tests for cookiecutter-coefficient (not the project it generates).
+
+Usage:
+    pytest -s ./tests/test_coefficient_cookiecutter.py
+"""
+
+from __future__ import annotations
 
 
-def test_version():
-    assert __version__ == '0.1.0'
+def test_not_much_at_all():
+    """This tests nothing."""
+    assert True
