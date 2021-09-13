@@ -68,7 +68,7 @@ repos:
     hooks:
       - id: pyupgrade
         args:
-          - "--{{ "".join(cookiecutter.python_version.split('.')[:2]) }}-plus"
+          - "--py{{ "".join(cookiecutter.python_version.split('.')[:2]) }}-plus"
   - repo: https://github.com/Yelp/detect-secrets
     rev: v1.0.3
     hooks:

@@ -49,7 +49,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.black]
 line-length = {{ cookiecutter.line_length }}
-target-version = ["{{ "".join(cookiecutter.python_version.split('.')[:2]) }}"]
+target-version = ["py{{ "".join(cookiecutter.python_version.split('.')[:2]) }}"]
 
 [tool.isort]
 profile = "black"
