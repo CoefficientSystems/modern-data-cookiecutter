@@ -177,6 +177,21 @@ requests = ">=2.23.0"
 six = ">=1.10"
 
 [[package]]
+name = "detect-secrets"
+version = "1.0.3"
+description = "Tool for detecting secrets in the codebase"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+pyyaml = "*"
+requests = "*"
+
+[package.extras]
+word_list = ["pyahocorasick"]
+
+[[package]]
 name = "distlib"
 version = "0.3.2"
 description = "Distribution utilities"
@@ -276,6 +291,19 @@ description = "The package provides base classes and utils for flake8 plugin wri
 category = "dev"
 optional = false
 python-versions = ">=3.6,<4.0"
+
+[[package]]
+name = "flake8-print"
+version = "4.0.0"
+description = "print statement checker plugin for flake8"
+category = "dev"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+flake8 = ">=3.0"
+pycodestyle = "*"
+six = "*"
 
 [[package]]
 name = "flake8-return"
@@ -732,7 +760,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "467acd39e84949b5eeb512742ef14310a76c2f5567c4805ef4428f8317d19b70"
+content-hash = "c009016424b3621c746cde4cedd9cc660c8b31b609206ed0fbaf9947916f373a"
 
 [metadata.files]
 arrow = [
@@ -794,6 +822,10 @@ cookiecutter = [
     {file = "cookiecutter-1.7.3-py2.py3-none-any.whl", hash = "sha256:f8671531fa96ab14339d0c59b4f662a4f12a2ecacd94a0f70a3500843da588e2"},
     {file = "cookiecutter-1.7.3.tar.gz", hash = "sha256:6b9a4d72882e243be077a7397d0f1f76fe66cf3df91f3115dbb5330e214fa457"},
 ]
+detect-secrets = [
+    {file = "detect_secrets-1.0.3-py2.py3-none-any.whl", hash = "sha256:715d2351d1f0f18cf4e7861e74b4135af909652c07a79501abac86400c9d2164"},
+    {file = "detect_secrets-1.0.3.tar.gz", hash = "sha256:e2ea3f6b687a4d6ed4321f93ea7314ceceb383c643c85864ee38c0591ec42112"},
+]
 distlib = [
     {file = "distlib-0.3.2-py2.py3-none-any.whl", hash = "sha256:23e223426b28491b1ced97dc3bbe183027419dfc7982b4fa2f05d5f3ff10711c"},
     {file = "distlib-0.3.2.zip", hash = "sha256:106fef6dc37dd8c0e2c0a60d3fca3e77460a48907f335fa28420463a6f799736"},
@@ -832,6 +864,10 @@ flake8-no-pep420 = [
 flake8-plugin-utils = [
     {file = "flake8-plugin-utils-1.3.2.tar.gz", hash = "sha256:20fa2a8ca2decac50116edb42e6af0a1253ef639ad79941249b840531889c65a"},
     {file = "flake8_plugin_utils-1.3.2-py3-none-any.whl", hash = "sha256:1fe43e3e9acf3a7c0f6b88f5338cad37044d2f156c43cb6b080b5f9da8a76f06"},
+]
+flake8-print = [
+    {file = "flake8-print-4.0.0.tar.gz", hash = "sha256:5afac374b7dc49aac2c36d04b5eb1d746d72e6f5df75a6ecaecd99e9f79c6516"},
+    {file = "flake8_print-4.0.0-py3-none-any.whl", hash = "sha256:6c0efce658513169f96d7a24cf136c434dc711eb00ebd0a985eb1120103fe584"},
 ]
 flake8-return = [
     {file = "flake8-return-1.1.3.tar.gz", hash = "sha256:13a31edeb0c6157dd4f77166cdaa6141703d2b8b24def5558ae659852a003cb4"},
