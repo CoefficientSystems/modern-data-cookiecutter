@@ -12,6 +12,8 @@
     "use_towncrier": "y",
     "use_gcloud": "y",
     "use_jupyter": "y",
+    "use_github_actions": "y",
+    "use_dependabot": "y",
     "issue_url": "https://github.com/username/repo/issues/",
     "_copy_without_render": [
         "*.changelog/template.md"
