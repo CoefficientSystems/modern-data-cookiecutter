@@ -3,6 +3,7 @@
         "ms-python.python",
         "ms-python.vscode-pylance",
         "esbenp.prettier-vscode",
-        "wayou.vscode-todo-highlight"
+        "wayou.vscode-todo-highlight",
+        "bungcip.better-toml"
     ]
 }

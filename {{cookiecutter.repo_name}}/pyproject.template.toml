@@ -5,13 +5,13 @@
 name = "{{ cookiecutter.package_name }}"
 version = "{{ cookiecutter.version }}"
 description = "{{ cookiecutter.project_short_description }}"
-authors = ["{{ cookiecutter.full_name.replace('\"', '\\\"') }} <{{ cookiecutter.email }}"]
+authors = ["{{ cookiecutter.full_name.replace('\"', '\\\"') }} <{{ cookiecutter.email }}>"]
 license = "UNLICENSED"
 classifiers = ["Private :: Do Not Upload"]
 packages = [
-    { include = "{{ cookiecutter.package_name }}", from = "{{ cookiecutter.package_name }}" },
-    # Add more packages here, e.g.
-    # { include = "module_name", from = "{{ cookiecutter.package_name }}" },
+  { include = "{{ cookiecutter.package_name }}", from = "{{ cookiecutter.package_name }}" },
+  # Add more packages here, e.g.
+  # { include = "module_name", from = "{{ cookiecutter.package_name }}" },
 ]
 
 [tool.poetry.dependencies]
