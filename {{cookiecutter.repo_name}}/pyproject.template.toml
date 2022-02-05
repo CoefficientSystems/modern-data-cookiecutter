@@ -1,16 +1,13 @@
 ###########
 # 📜 Poetry
 ###########
-
 [tool.poetry]
 name = "{{ cookiecutter.package_name }}"
 version = "{{ cookiecutter.version }}"
 description = "{{ cookiecutter.project_short_description }}"
 authors = ["{{ cookiecutter.full_name.replace('\"', '\\\"') }} <{{ cookiecutter.email }}"]
 license = "UNLICENSED"
-classifiers = [
-    "Private :: Do Not Upload"
-]
+classifiers = ["Private :: Do Not Upload"]
 packages = [
     { include = "{{ cookiecutter.package_name }}", from = "{{ cookiecutter.package_name }}" },
     # Add more packages here, e.g.
@@ -19,6 +16,7 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^{{ cookiecutter.python_version }}"
+# Everything below here is alphabetically sorted
 
 [tool.poetry.dev-dependencies]
 # Everything below here is alphabetically sorted
@@ -44,11 +42,9 @@ towncrier = "^21.3.0"{% endif %}
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
-
 ############
 # ✅ Linters
 ############
-
 [tool.black]
 line-length = {{ cookiecutter.line_length }}
 target-version = ["py{{ "".join(cookiecutter.python_version.split('.')[:2]) }}"]
@@ -59,14 +55,14 @@ line_length = {{ cookiecutter.line_length }}
 default_section = "THIRDPARTY"
 known_first_party = ["{{ cookiecutter.package_name }}"]
 sections = "FUTURE,STDLIB,THIRDPARTY,FIRSTPARTY,LOCALFOLDER"
-add_imports="from __future__ import annotations"
+add_imports = "from __future__ import annotations"
 
 [tool.pylint.MASTER]
 ignore-paths = [".git"]
 load-plugins = []
 
 [tool.pylint."MESSAGES CONTROL"]
-enable="all"
+enable = "all"
 max-module-lines = 2000
 max-line-length = {{ cookiecutter.line_length }}
 max-locals = 50
@@ -76,13 +72,11 @@ max-args = 22
 max-branches = 17
 # good-names = []
 # disable = []
-logging-format-style="new"
-
+logging-format-style = "new"
 
 ##############
 # 📣 Towncrier
 ##############
-
 {% if cookiecutter.use_towncrier == 'y' -%}
 [tool.towncrier]
 package = "{{ cookiecutter.package_name }}"
@@ -104,7 +98,6 @@ underlines = ["", ""]
 # .analysis for data analyses
 # .docs for documentation improvements
 # .maintenance for maintenance tasks & upgrades
-
 [[tool.towncrier.type]]
 directory = "added"
 name = "Added"
