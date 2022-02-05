@@ -1,3 +1,5 @@
+"""Example test."""
+
 from __future__ import annotations
 
 from {{cookiecutter.package_name}} import __version__
