@@ -1,5 +1,7 @@
 # coefficient-cookiecutter
 
+[![CI](https://github.com/CoefficientSystems/coefficient-cookiecutter/actions/workflows/main.yaml/badge.svg)](https://github.com/CoefficientSystems/coefficient-cookiecutter/actions/workflows/main.yaml)
+
 [Cookiecutter](https://github.com/cookiecutter/cookiecutter) template for Coefficient projects.
 
   - GitHub repo: [https://github.com/CoefficientSystems/coefficient-cookiecutter/]

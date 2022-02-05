@@ -1,5 +1,7 @@
 # {{ cookiecutter.project_name }}
 
+[![CI]({{cookiecutter.repo_url}}/actions/workflows/main.yaml/badge.svg)]({{cookiecutter.repo_url}}/actions/workflows/main.yaml)
+
 {{ cookiecutter.project_short_description }}
 
 ## Project cheatsheet
