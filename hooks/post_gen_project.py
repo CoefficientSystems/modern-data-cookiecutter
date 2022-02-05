@@ -5,6 +5,7 @@ Read more: https://cookiecutter.readthedocs.io/en/1.7.3/advanced/hooks.html
 
 from __future__ import annotations
 
+import logging
 import os
 import shutil
 from pathlib import Path
@@ -26,3 +27,16 @@ if __name__ == "__main__":
 
     if "{{ cookiecutter.use_towncrier }}" != "y":
         os.remove(PROJECT_DIRECTORY / "docs" / "using_towncrier.md")
+
+    if "{{ cookiecutter.use_github_actions }}" != "y":
+        try:
+            shutil.rmtree(PROJECT_DIRECTORY / ".github" / "workflows")
+        except Exception as error_message:  # pylint: disable=broad-except
+            logging.error(error_message)
+
+        # Don't need .github if using neither GitHub Actions nor dependabot
+        if "{{ cookiecutter.use_dependabot }}" != "y":
+            try:
+                shutil.rmtree(PROJECT_DIRECTORY / ".github")
+            except Exception as error_message:  # pylint: disable=broad-except
+                logging.error(error_message)
