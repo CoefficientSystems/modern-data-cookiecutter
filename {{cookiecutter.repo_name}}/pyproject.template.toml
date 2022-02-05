@@ -21,17 +21,19 @@ packages = [
 python = "^{{ cookiecutter.python_version }}"
 
 [tool.poetry.dev-dependencies]
+# Everything below here is alphabetically sorted
 black = "^21.8b0"
 detect-secrets = "1.0.3"
+flake8 = "^3.9.2"
 flake8-docstrings = "^1.6.0"
 flake8-eradicate = "^1.1.0"
 flake8-fixme = "^1.1.1"
 flake8-implicit-str-concat = "^0.2.0"
 flake8-no-pep420 = "^1.1.1"
-flake8-return = "^1.1.3"
 flake8-print = "^4.0.0"
-flake8 = "^3.9.2"
+flake8-return = "^1.1.3"
 isort = "^5.9.3"
+pip-audit = "^1.1.2"
 pre-commit = "^2.15.0"
 pylint = "^2.10.2"
 pytest = "^5.2"
@@ -72,11 +74,8 @@ min-similarity-lines = 150
 max-statements = 89
 max-args = 22
 max-branches = 17
-good-names = [
-]
-disable = [
-    # "missing-module-docstring",  # example
-]
+# good-names = []
+# disable = []
 logging-format-style="new"
 
 

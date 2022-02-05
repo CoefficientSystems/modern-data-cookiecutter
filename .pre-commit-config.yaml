@@ -1,8 +1,12 @@
+# Update all versions in this file by running:
+#   $ pre-commit autoupdate
 minimum_pre_commit_version: 2.15.0
+default_language_version:
+  python: python3.9
 exclude: "{{cookiecutter.repo_name}}"
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.0.1
+    rev: v4.1.0
     hooks:
       - id: end-of-file-fixer
         name: Check for a blank line at the end of scripts (auto-fixes)
@@ -51,21 +55,21 @@ repos:
           - flake8-print==4.0.0
         args: ["--config=setup.cfg"]
   - repo: https://github.com/psf/black
-    rev: 21.8b0
+    rev: 22.1.0
     hooks:
       - id: black
   - repo: https://github.com/asottile/add-trailing-comma
-    rev: v2.1.0
+    rev: v2.2.1
     hooks:
       - id: add-trailing-comma
         args: [--py36-plus]
   - repo: https://github.com/timothycrosley/isort
-    rev: 5.9.3
+    rev: 5.10.1
     hooks:
       - id: isort
         types: [python]
   - repo: https://github.com/asottile/pyupgrade
-    rev: v2.25.1
+    rev: v2.31.0
     hooks:
       - id: pyupgrade
         args:
@@ -95,12 +99,20 @@ repos:
               \.env\.template
           )$
   - repo: https://github.com/Cielquan/mirrors-poetry
-    rev: 1.1.8
+    rev: 1.1.12
     hooks:
       - id: poetry-check
       - id: poetry-lock
         args: ["--no-update"]
       - id: poetry-export
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v2.5.1
+    hooks:
+      - id: prettier
+        types_or: [toml, yaml]
+        additional_dependencies:
+          - "prettier@2.3.1"
+          - "prettier-plugin-toml@0.3.1"
   - repo: local
     hooks:
       - id: pylint
@@ -110,6 +122,14 @@ repos:
         always_run: true
         pass_filenames: false
         stages: [manual]
+      - id: pip-audit
+        name: pip-audit
+        entry: pip-audit
+        language: system
+        always_run: true
+        pass_filenames: false
+        stages: [manual]
+
     # - id: pip-sync-dry-run
     #     name: pip-sync-dry-run
     #     entry: pip-sync --dry-run
