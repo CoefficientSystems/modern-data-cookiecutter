@@ -78,4 +78,4 @@ jobs:
 
       - name: pytest
         # run: pytest --junitxml=junit.xml --cov --cov-report=term-missing:skip-covered --cov-report=xml
-        run: pytest
+        run: pytest --ignore='{{cookiecutter.repo_name}}'
