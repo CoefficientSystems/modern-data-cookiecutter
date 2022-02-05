@@ -10,6 +10,8 @@
     "version": "0.1.0",
     "line_length": "100",
     "use_towncrier": "y",
+    "use_gcloud": "y",
+    "use_jupyter": "y",
     "issue_url": "https://github.com/username/repo/issues/",
     "_copy_without_render": [
         "*.changelog/template.md"

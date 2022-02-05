@@ -20,9 +20,9 @@ cookiecutter https://github.com/CoefficientSystems/coefficient-cookiecutter
 
 ## Contributing
 
-This cookiecutter project is self-referential (!) and conforms to the guidelines outlined in the
-generated cookiecutter documentation. Please refer to [{{cookiecutter.repo_name}}/README.md] and
-[{{cookiecutter.repo_name}}/docs/] for advice on how to contribute.
+This cookiecutter project is self-referential (!) and conforms to the guidelines outlined in the generated
+cookiecutter documentation. Please refer to [{{cookiecutter.repo_name}}/README.md]({{cookiecutter.repo_name}}/README.md)
+and [{{cookiecutter.repo_name}}/docs/]({{cookiecutter.repo_name}}/docs/) for advice on how to contribute.
 
 
 ## Manual test

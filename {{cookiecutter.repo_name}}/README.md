@@ -14,11 +14,13 @@
 
 ## Initial project setup
 
-1. See [docs/getting_started.md] for how to get up & running.
-2. See [docs/using_poetry.md] for how to update Python requirements using
+1. See [docs/getting_started.md](docs/getting_started.md) or [docs/quickstart.md](docs/quickstart.md)
+   for how to get up & running.
+2. Check [docs/project_specific_setup.md](docs/project_specific_setup.md) for project specific setup.
+3. See [docs/using_poetry.md](docs/using_poetry.md) for how to update Python requirements using
    [Poetry](https://python-poetry.org/).
-3. See [docs/detect_secrets.md] for more on creating a `.secrets.baseline` file using
-   [detect-secrets](https://github.com/Yelp/detect-secrets).
+4. See [docs/detect_secrets.md](docs/detect_secrets.md) for more on creating a `.secrets.baseline`
+   file using [detect-secrets](https://github.com/Yelp/detect-secrets).
 {% if cookiecutter.use_towncrier == 'y' -%}
-4. See [docs/using_towncrier.md] for how to update the `CHANGELOG.md` using
-   [towncrier](https://github.com/twisted/towncrier).{% endif %}
+5. See [docs/using_towncrier.md](docs/using_towncrier.md) for how to update the `CHANGELOG.md`
+   using [towncrier](https://github.com/twisted/towncrier). {% endif %}
