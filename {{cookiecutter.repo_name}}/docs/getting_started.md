@@ -47,7 +47,7 @@ Configure by adding the following to your `~/.zshrc` or equivalent:
 export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/code  # <- change this to wherever you store your repos
-export VIRTUALENVWRAPPER_PYTHON=~/.pyenv/shims/python
+export VIRTUALENVWRAPPER_PYTHON=$HOME/.pyenv/shims/python
 pyenv virtualenvwrapper_lazy
 ```
 
@@ -82,7 +82,7 @@ git clone ${REPO_GIT_URL}
 pyenv shell $(cat .python-version)
 
 # Make a new virtual environment using the Python version & environment name specified in the repo
-mkvirtualenv $(cat .venv)
+mkvirtualenv -p python$(cat .python-version) $(cat .venv)
 python -V  # check this is the correct version of Python
 python -m pip install --upgrade pip
 ```
@@ -131,12 +131,21 @@ Check it's working by cd-ing into & out of the repo. The environment should load
 ## 7. Initialise the `detect-secrets` pre-commit hook
 
 We use [`detect-secrets`](https://github.com/Yelp/detect-secrets) to check that no secrets are
-accidentally committed. Please read [docs/detect_secrets.md] for more information.
+accidentally committed. Please read [docs/detect_secrets.md](docs/detect_secrets.md) for more information.
 
 
 ```shell
 # Generate a baseline
 detect-secrets scan > .secrets.baseline
+
+# You may want to check/amend the exclusions in `.pre-commit-config.yaml` e.g.
+detect-secrets --verbose scan \
+    --exclude-files 'poetry\.lock' \
+    --exclude-files '\.secrets\.baseline' \
+    --exclude-files '\.env\.template' \
+    --exclude-secrets 'password|ENTER_PASSWORD_HERE|INSERT_API_KEY_HERE' \
+    --exclude-lines 'integrity=*sha' \
+    > .secrets.baseline
 
 # Audit the generated baseline
 detect-secrets audit .secrets.baseline
@@ -146,3 +155,8 @@ When you run this command, you'll enter an interactive console. This will presen
 of high-entropy string and/or anything which could be a secret. It will then ask you to verify
 whether this is the case. This allows the hook to remember false positives in the future, and alert
 you to new secrets.
+
+
+## 8. Project-specific setup
+
+Please check [docs/project_specific_setup.md](docs/project_specific_setup.md) for further instructions.

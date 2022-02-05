@@ -71,12 +71,29 @@ repos:
         args:
           - "--py39-plus"
   - repo: https://github.com/Yelp/detect-secrets
-    rev: v1.0.3
+    rev: v1.1.0
     hooks:
       - id: detect-secrets
         name: detect-secrets - Detect secrets in staged code
-        args: ["--baseline", ".secrets.baseline"]
-        exclude: .*/tests/.*|^\.cruft\.json$
+        args: [
+            "--baseline",
+            ".secrets.baseline",
+            # https://regex101.com/
+            "--exclude-files 'poetry\\.lock'",
+            "--exclude-files '\\.secrets\\.baseline'",
+            "--exclude-files '\\.env\\.template'",
+            # "--exclude-files '.*\\.ipynb$'",
+            # "--exclude-files '.*build/'",
+            "--exclude-secrets 'password|ENTER_PASSWORD_HERE|INSERT_API_KEY_HERE'",
+            "--exclude-lines 'integrity=*sha'",
+          ]
+        # https://pre-commit.com/#regular-expressions
+        exclude: |
+          (?x)^(
+              poetry\.lock|
+              \.secrets\.baseline|
+              \.env\.template
+          )$
   - repo: https://github.com/Cielquan/mirrors-poetry
     rev: 1.1.8
     hooks:
