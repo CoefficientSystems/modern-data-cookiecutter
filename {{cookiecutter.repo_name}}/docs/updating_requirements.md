@@ -8,6 +8,8 @@ poetryup --latest
 poetry-regenerate
 poetry-sync
 pre-commit run --all-files --hook-stage=manual
+poetry-sync
+pytest
 # Commit & push
 ```
 
