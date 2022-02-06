@@ -10,6 +10,7 @@
   - **pytest:** `pytest` or `pytest -s`
   - **coverage:** `coverage run -m pytest` or `coverage html`
   - **poetry sync:** `poetry install --no-root --remove-untracked`
+  - **updating requirements:** see [docs/updating_requirements.md](docs/updating_requirements.md)
 {% if cookiecutter.use_towncrier == 'y' -%}
   - **create towncrier entry:** `towncrier create 123.added --edit`{% endif %}
 
