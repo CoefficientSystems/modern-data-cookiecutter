@@ -83,4 +83,4 @@ jobs:
         # run: pytest --junitxml=junit.xml --cov --cov-report=term-missing:skip-covered --cov-report=xml
         run: |
           source venv/bin/activate
-          pytest
+          pytest --ignore='{{cookiecutter.repo_name}}'
