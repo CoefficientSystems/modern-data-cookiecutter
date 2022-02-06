@@ -21,13 +21,14 @@ git clone ${REPO_GIT_URL}
 # Install Python
 pyenv install $(cat .python-version)
 pyenv shell $(cat .python-version)
+python -m pip install --upgrade pip
+python -m pip install virtualenvwrapper
+pyenv virtualenvwrapper
 
 # Setup the virtualenv
 mkvirtualenv -p python$(cat .python-version) $(cat .venv)
 python -V
 python -m pip install --upgrade pip
-python -m pip install virtualenvwrapper
-pyenv virtualenvwrapper_lazy
 
 # Install dependencies with Poetry
 poetry self update
