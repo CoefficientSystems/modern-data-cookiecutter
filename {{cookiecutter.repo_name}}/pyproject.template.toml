@@ -20,21 +20,24 @@ python = "^{{ cookiecutter.python_version }}"
 
 [tool.poetry.dev-dependencies]
 # Everything below here is alphabetically sorted
-black = "^21.8b0"
-detect-secrets = "1.0.3"
-flake8 = "^3.9.2"
+black = "^22.1.0"
+detect-secrets = "1.1.0"
+flake8 = "^4.0.1"
 flake8-docstrings = "^1.6.0"
-flake8-eradicate = "^1.1.0"
+flake8-eradicate = "^1.2.0"
 flake8-fixme = "^1.1.1"
 flake8-implicit-str-concat = "^0.2.0"
-flake8-no-pep420 = "^1.1.1"
+flake8-no-pep420 = "^2.2.0"
 flake8-print = "^4.0.0"
 flake8-return = "^1.1.3"
-isort = "^5.9.3"
+isort = "^5.10.1"
 pip-audit = "^1.1.2"
-pre-commit = "^2.15.0"
-pylint = "^2.10.2"
-pytest = "^5.2"
+# poetryup = "^0.5.1"
+# https://github.com/MousaZeidBaker/poetryup/pull/29
+poetryup = { git = "https://github.com/john-sandall/poetryup.git", rev = "fdfaf4d446249f8f69db613bac285e818a7df92f" } # pragma: allowlist secret
+pre-commit = "^2.17.0"
+pylint = "^2.12.2"
+pytest = "^7.0.0"
 {% if cookiecutter.use_towncrier == 'y' -%}
 towncrier = "^21.3.0"{% endif %}
 
