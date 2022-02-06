@@ -29,6 +29,9 @@ flake8-no-pep420 = "^2.2.0"
 flake8-print = "^4.0.0"
 flake8-return = "^1.1.3"
 isort = "^5.10.1"
+# nb-black = "^1.0.7"
+# https://github.com/dnanhkhoa/nb_black/issues/32#issuecomment-1028469823
+nb-black = { git = "https://github.com/dnanhkhoa/nb_black.git", rev = "be0c810503867abc4a5e9d05ba75a16fce57dfee" } # pragma: allowlist secret
 pip-audit = "^1.1.2"
 # poetryup = "^0.5.1"
 # https://github.com/MousaZeidBaker/poetryup/pull/29
