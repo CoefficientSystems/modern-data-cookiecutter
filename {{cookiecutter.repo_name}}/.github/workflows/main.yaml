@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: ${{ github.head_ref || github.run_id }}
+  group: ${{"{{"}} github.head_ref || github.run_id {{"}}"}}
   cancel-in-progress: true
 
 jobs:
@@ -21,10 +21,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python ${{"{{"}} matrix.python-version {{"}}"}}
         uses: actions/setup-python@v2
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: ${{"{{"}} matrix.python-version {{"}}"}}
 
       - name: Create virtualenv
         run: |
@@ -38,7 +38,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: venv
-          key: venv-${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}
+          key: venv-${{"{{"}} matrix.python-version {{"}}"}}-${{"{{"}} hashFiles('poetry.lock') {{"}}"}}
 
       - name: Install Poetry and Python dependencies
         run: |
@@ -67,9 +67,9 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.cache/pre-commit
-          key: ${{ steps.pre-commit-cache.outputs.result }}-${{ hashFiles('.pre-commit-config.yaml') }}
+          key: ${{"{{"}} steps.pre-commit-cache.outputs.result {{"}}"}}-${{"{{"}} hashFiles('.pre-commit-config.yaml') {{"}}"}}
           restore-keys: |
-            ${{ steps.pre-commit-cache.outputs.result }}-
+            ${{"{{"}} steps.pre-commit-cache.outputs.result {{"}}"}}-
 
       - name: pre-commit
         run: |
