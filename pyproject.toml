@@ -14,7 +14,7 @@ classifiers = ["Private :: Do Not Upload"]
 [tool.poetry.dependencies]
 python = "^3.9"
 # Everything below here is alphabetically sorted
-cookiecutter = "^1.7.3"
+cookiecutter = "^2.1.1"
 
 [tool.poetry.dev-dependencies]
 # Everything below here is alphabetically sorted
