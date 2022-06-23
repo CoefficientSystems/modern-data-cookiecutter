@@ -35,9 +35,7 @@ isort = "^5.10.1"
 # https://github.com/dnanhkhoa/nb_black/issues/32#issuecomment-1028469823
 nb-black = { git = "https://github.com/dnanhkhoa/nb_black.git", rev = "be0c810503867abc4a5e9d05ba75a16fce57dfee" } # pragma: allowlist secret
 pip-audit = "^1.1.2"
-# poetryup = "^0.5.1"
-# https://github.com/MousaZeidBaker/poetryup/pull/29
-poetryup = { git = "https://github.com/john-sandall/poetryup.git", rev = "fdfaf4d446249f8f69db613bac285e818a7df92f" } # pragma: allowlist secret
+poetryup = "^0.8.1"
 pre-commit = "^2.17.0"
 pylint = "^2.12.2"
 pytest = "^7.0.0"
