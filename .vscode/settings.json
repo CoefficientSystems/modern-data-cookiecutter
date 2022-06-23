@@ -2,6 +2,8 @@
     // editor & autoformatter settings
     "editor.formatOnSave": true,
     "editor.trimAutoWhitespace": true,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs":"active",
     "files.trimTrailingWhitespace": true,
     "prettier.enable": true,
 
@@ -51,4 +53,6 @@
     // Disable VS Code experiments to ensure consistent experience across the team
     // (see https://github.com/microsoft/vscode-python/wiki/AB-Experiments)
     "python.experiments.enabled": false,
+
+
 }
