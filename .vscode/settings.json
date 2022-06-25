@@ -13,16 +13,15 @@
 
     // python - other
     "python.languageServer": "Pylance",
-    "python.pythonPath": "${env:VIRTUAL_ENV}",
 
     // python - linting & static analysis
-    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.typeCheckingMode": "off",
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
     "python.linting.flake8Args": [],
+    "python.linting.mypyEnabled": true,
     "python.linting.pylintEnabled": true,
     "python.linting.pylintArgs": [],
-    "python.linting.pylintUseMinimalCheckers": false,
 
     // python - isort
     "python.sortImports.args": ["--recursive"],
@@ -45,14 +44,10 @@
     "git.enabled": true,
 
     // file associations
-    "workbench.editorAssociations": {"*.ipynb": "jupyter.notebook.ipynb"},
     "files.associations": {
-        // "**/requirements{/**,*}.{txt,in}": "pip-requirements",
+        "**/*.html": "html",
+        "**/*.js": "javascript",
+        "**/requirements{/**,*}.{txt,in}": "pip-requirements",
     },
-
-    // Disable VS Code experiments to ensure consistent experience across the team
-    // (see https://github.com/microsoft/vscode-python/wiki/AB-Experiments)
-    "python.experiments.enabled": false,
-
 
 }
