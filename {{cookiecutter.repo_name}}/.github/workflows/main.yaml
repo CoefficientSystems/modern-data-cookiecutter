@@ -19,10 +19,10 @@ jobs:
         python-version: [3.9]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Set up Python ${{"{{"}} matrix.python-version {{"}}"}}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{"{{"}} matrix.python-version {{"}}"}}
 
@@ -35,7 +35,7 @@ jobs:
           which python
 
       - name: Set up Poetry cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3.0.1
         with:
           path: venv
           key: venv-${{"{{"}} matrix.python-version {{"}}"}}-${{"{{"}} hashFiles('poetry.lock') {{"}}"}}
@@ -64,7 +64,7 @@ jobs:
           print("::set-output name=result::{}".format(result))
 
       - name: Restore pre-commit cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3.0.1
         with:
           path: ~/.cache/pre-commit
           key: ${{"{{"}} steps.pre-commit-cache.outputs.result {{"}}"}}-${{"{{"}} hashFiles('.pre-commit-config.yaml') {{"}}"}}
