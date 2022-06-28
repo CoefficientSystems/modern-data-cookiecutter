@@ -616,14 +616,15 @@ python-versions = "*"
 
 [[package]]
 name = "packageurl-python"
-version = "0.9.9"
+version = "0.10.0"
 description = "A purl aka. Package URL parser and builder"
 category = "dev"
 optional = false
 python-versions = ">=3.6"
 
 [package.extras]
-test = ["isort", "pytest"]
+build = ["wheel"]
+test = ["pytest", "isort", "black"]
 
 [[package]]
 name = "packaging"
@@ -1496,8 +1497,8 @@ nodeenv = [
     {file = "nodeenv-1.6.0.tar.gz", hash = "sha256:3ef13ff90291ba2a4a7a4ff9a979b63ffdd00a464dbe04acf0ea6471517a4c2b"},
 ]
 packageurl-python = [
-    {file = "packageurl-python-0.9.9.tar.gz", hash = "sha256:872a0434b9a448b3fa97571711f69dd2a3fb72345ad66c90b17d827afea82f09"},
-    {file = "packageurl_python-0.9.9-py3-none-any.whl", hash = "sha256:07aa852d1c48b0e86e625f6a32d83f96427739806b269d0f8142788ee807114b"},
+    {file = "packageurl-python-0.10.0.tar.gz", hash = "sha256:99df143960b7100fff3b2cf5b0beba2f64b6d8c818f6c9f125aed6fac7438763"},
+    {file = "packageurl_python-0.10.0-py3-none-any.whl", hash = "sha256:c7dc928aaa9465f04c86eaa956c75247d5f140ec8d50bc111b55314f143324bb"},
 ]
 packaging = [
     {file = "packaging-21.3-py3-none-any.whl", hash = "sha256:ef103e05f519cdc783ae24ea4e2e0f508a9c99b2d4969652eed6a2e1ea5bd522"},
