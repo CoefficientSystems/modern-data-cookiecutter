@@ -730,7 +730,7 @@ testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
 name = "poetryup"
-version = "0.8.1"
+version = "0.8.2"
 description = "Update dependencies and bump their version in the pyproject.toml file"
 category = "dev"
 optional = false
@@ -1536,8 +1536,8 @@ pluggy = [
     {file = "pluggy-1.0.0.tar.gz", hash = "sha256:4224373bacce55f955a878bf9cfa763c1e360858e330072059e10bad68531159"},
 ]
 poetryup = [
-    {file = "poetryup-0.8.1-py3-none-any.whl", hash = "sha256:75c1805033b740dceea25cd4bcb69361da463696af69443322cc4c872efff7e9"},
-    {file = "poetryup-0.8.1.tar.gz", hash = "sha256:a016c1f13bb2e0bba3a75c4acd0ee7f2b22d16f3f265f30b24d75a4f4b4d8839"},
+    {file = "poetryup-0.8.2-py3-none-any.whl", hash = "sha256:ccad2d2ad4730b1af8bf0915e0ffe4818969f5de28b8754059e6497d4df61cfb"},
+    {file = "poetryup-0.8.2.tar.gz", hash = "sha256:e15f04dcb035a98be537801698e3bbc9cbd42d6677fae20a2c2fa9d2e41a6b60"},
 ]
 pre-commit = [
     {file = "pre_commit-2.19.0-py2.py3-none-any.whl", hash = "sha256:10c62741aa5704faea2ad69cb550ca78082efe5697d6f04e5710c3c229afdd10"},
