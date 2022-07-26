@@ -1,5 +1,9 @@
 # coefficient-cookiecutter
 
+<!-- badges-begin -->
+
+[![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
 [![CI](https://github.com/CoefficientSystems/coefficient-cookiecutter/actions/workflows/main.yaml/badge.svg)](https://github.com/CoefficientSystems/coefficient-cookiecutter/actions/workflows/main.yaml)
 
 [Cookiecutter](https://github.com/cookiecutter/cookiecutter) template for Coefficient projects.
@@ -20,48 +24,22 @@ cookiecutter /path/to/coefficient-cookiecutter/
 cookiecutter https://github.com/CoefficientSystems/coefficient-cookiecutter
 ```
 
+## Features
+
+<!-- features-begin -->
+
+- Packaging and dependency management with [Poetry]
+- Linting with [pre-commit]
+- CI with [GitHub Actions]
+- Automated dependency updates with [Dependabot]
+- Code formatting with [Black] and [pylint]
+- Import sorting with [isort]
+- Testing with [pytest]
+
+<!-- features-end -->
+
 ## Contributing
 
 This cookiecutter project is self-referential (!) and conforms to the guidelines outlined in the generated
 cookiecutter documentation. Please refer to [{{cookiecutter.repo_name}}/README.md]({{cookiecutter.repo_name}}/README.md)
 and [{{cookiecutter.repo_name}}/docs/]({{cookiecutter.repo_name}}/docs/) for advice on how to contribute.
-
-
-## Manual test
-
-```bash
-pipx install cookiecutter
-cookiecutter /path/to/coefficient-cookiecutter/
-# Use project defaults
-cd coefficient-project
-
-# Install Python & dependencies
-pyenv shell $(cat .python-version)
-python -V  # check this is the correct version of Python
-mkvirtualenv $(cat .venv)
-python -V  # check this is the correct version of Python
-python -m pip install --upgrade pip
-poetry install --no-root --remove-untracked
-
-# Run tests
-pytest
-
-# Towncrier & pre-commit require us to be in a repo
-git init
-
-# Test towncrier (if installed)
-towncrier create 123.added --edit
-# Write something, save, close
-towncrier build --version=0.2
-# Confirm your update is now in CHANGELOG.md
-
-# Test out pre-commit
-pre-commit run --all-files --hook-stage=manual --show-diff-on-failure
-
-# Clean up
-deactivate
-rmvirtualenv $(cat .venv)
-rm -rf ./.git/
-cd ..
-rm -r ./coefficient-project
-```
