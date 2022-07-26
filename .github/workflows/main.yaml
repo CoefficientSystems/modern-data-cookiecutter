@@ -84,3 +84,8 @@ jobs:
         run: |
           source venv/bin/activate
           pytest --ignore='{{cookiecutter.repo_name}}'
+
+      - name: Install cookiecutter
+        run: |
+          source venv/bin/activate
+          pipx install cookiecutter

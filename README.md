@@ -4,8 +4,7 @@
 
 [Cookiecutter](https://github.com/cookiecutter/cookiecutter) template for Coefficient projects.
 
-  - GitHub repo: [https://github.com/CoefficientSystems/coefficient-cookiecutter/]
-
+- GitHub repo: [https://github.com/CoefficientSystems/coefficient-cookiecutter/]
 
 ## Usage
 
@@ -25,7 +24,6 @@ cookiecutter https://github.com/CoefficientSystems/coefficient-cookiecutter
 This cookiecutter project is self-referential (!) and conforms to the guidelines outlined in the generated
 cookiecutter documentation. Please refer to [{{cookiecutter.repo_name}}/README.md]({{cookiecutter.repo_name}}/README.md)
 and [{{cookiecutter.repo_name}}/docs/]({{cookiecutter.repo_name}}/docs/) for advice on how to contribute.
-
 
 ## Manual test
 
