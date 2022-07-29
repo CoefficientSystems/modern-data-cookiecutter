@@ -42,7 +42,7 @@ jobs:
 
       - name: Install Poetry and Python dependencies
         run: |
-          curl -sSL https://install.python-poetry.org | python3 -
+          curl -sSL https://install.python-poetry.org | python3 - --version 1.1.13
           poetry --version
           poetry config virtualenvs.in-project true
           poetry config virtualenvs.create false
