@@ -121,4 +121,4 @@ jobs:
 
       - name: Initialise cookiecutter repo
         run: |
-          cookiecutter .
+          cookiecutter . --no-input
