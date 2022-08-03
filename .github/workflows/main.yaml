@@ -120,10 +120,10 @@ jobs:
           python -m pip install --user cookiecutter
 
 
-      # - name: Install pyenv
-      #   uses: "gabrielfalcao/pyenv-action@v9"
-      #   with:
-      #     default: ${{ matrix.python-version }}
+      - name: Install pyenv
+        uses: "gabrielfalcao/pyenv-action@v9"
+        with:
+          default: ${{ matrix.python-version }}
 
       - name: Initialise cookiecutter repo
         run: |
@@ -132,7 +132,7 @@ jobs:
       - name: Create cookiecuttered Python environment
         run: |
           cd coefficient-project
-          curl https://pyenv.run | bash
+          # curl https://pyenv.run | bash
           exec $SHELL
           pyenv init
           pyenv install $(cat .python-version)
