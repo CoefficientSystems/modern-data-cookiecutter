@@ -128,13 +128,18 @@ jobs:
       - name: Initialise cookiecutter repo
         run: |
           cookiecutter . --no-input
+          echo "cookiecutter done"
+          ls
 
       - name: Create cookiecuttered Python environment
         run: |
           cd coefficient-project
+          pwd
           # curl https://pyenv.run | bash
           exec $SHELL
+          echo "Initialising pyenv"
           pyenv init
+          echo "Installing cookiecuttered Python"
           pyenv install $(cat .python-version)
           pyenv shell $(cat .python-version)
           python -V
