@@ -119,6 +119,23 @@ jobs:
           python -m pip install --constraint=.github/workflows/constraints.txt --upgrade pip
           python -m pip install --user cookiecutter
 
+
+      - name: Install pyenv
+        uses: "gabrielfalcao/pyenv-action@v9"
+        with:
+          default: ${{ matrix.python-version }}
+
       - name: Initialise cookiecutter repo
         run: |
           cookiecutter . --no-input
+
+      - name: Create cookiecuttered Python environment
+        run: |
+          cd coefficient-project
+          pyenv shell $(cat .python-version)
+          python -V
+          python -m venv $(cat .venv)
+          python -V
+          python -m pip install --upgrade pip
+          poetry install --no-root --remove-untracked
+          pwd
