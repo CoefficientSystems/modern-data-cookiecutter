@@ -11,15 +11,15 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    strategy:
-      matrix:
-        python-version: [3.9]
+  # build:
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 30
+  #   strategy:
+  #     matrix:
+  #       python-version: [3.9]
 
-    steps:
-      - uses: actions/checkout@v3
+  #   steps:
+  #     - uses: actions/checkout@v3
 
       # - name: Set up Python ${{ matrix.python-version }}
       #   uses: actions/setup-python@v4
@@ -119,26 +119,22 @@ jobs:
           python -m pip install --constraint=.github/workflows/constraints.txt --upgrade pip
           python -m pip install --user cookiecutter
 
+      - name: Initialise cookiecutter repo
+        run: |
+          cookiecutter . --no-input
+          echo "cc_python_version=$(cat ./coefficient-project/.python-version)"
+          echo "cc_python_version=$(cat ./coefficient-project/.python-version)" >> $GITHUB_ENV
 
       - name: Install pyenv
         uses: "gabrielfalcao/pyenv-action@v9"
         with:
-          default: ${{ matrix.python-version }}
-
-      - name: Initialise cookiecutter repo
-        run: |
-          cookiecutter . --no-input
-          ls
+          default: ${{ env.cc_python_version }}
 
       - name: Create cookiecuttered Python environment
         run: |
           cd coefficient-project
           pwd
-          echo "Initialising pyenv"
-          pyenv init
-          echo "Installing cookiecuttered Python"
-          pyenv install $(cat .python-version)
-          pyenv shell $(cat .python-version)
+          pyenv local $(cat .python-version)
           python -V
           python -m venv $(cat .venv)
           python -V
