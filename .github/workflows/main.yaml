@@ -122,7 +122,8 @@ jobs:
       - name: Initialise cookiecutter repo
         run: |
           cd ~
-          cookiecutter ./coefficient-cookiecutter/ --no-input
+          pwd
+          cookiecutter ./coefficient-cookiecutter/coefficient-cookiecutter/ --no-input
           echo "cc_python_version=$(cat ~/coefficient-project/.python-version)"
           echo "cc_python_version=$(cat ~/coefficient-project/.python-version)" >> $GITHUB_ENV
           echo "cc_venv=$(cat ~/coefficient-project/.venv)"
