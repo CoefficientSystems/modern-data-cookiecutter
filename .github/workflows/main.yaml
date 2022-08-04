@@ -128,12 +128,14 @@ jobs:
           echo "cc_venv=$(cat ./coefficient-project/.venv)" >> $GITHUB_ENV
 
       - name: Set up pyenv cache
+        id: cache-pyenv
         uses: actions/cache@v3.0.5
         with:
           path: /opt/hostedtoolcache/pyenv_root/2.2.4/x64
           key: pyenv-${{ env.cc_python_version }}
 
       - name: Install pyenv
+        if: steps.cache-pyenv.outputs.cache-hit != 'true'
         uses: "gabrielfalcao/pyenv-action@v9"
         with:
           default: ${{ env.cc_python_version }}
@@ -183,7 +185,7 @@ jobs:
           pyenv local $(cat .python-version)
           source $(cat .venv)/bin/activate
           towncrier create 123.added --no-edit
-          towncrier build --version=999
+          towncrier build --version=999 --yes
           less CHANGELOG.md
 
       - name: pre-commit
