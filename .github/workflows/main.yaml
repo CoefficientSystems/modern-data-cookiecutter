@@ -127,15 +127,16 @@ jobs:
           echo "cc_venv=$(cat ./coefficient-project/.venv)"
           echo "cc_venv=$(cat ./coefficient-project/.venv)" >> $GITHUB_ENV
 
-      - name: Set up pyenv cache
-        id: cache-pyenv
-        uses: actions/cache@v3.0.5
-        with:
-          path: /opt/hostedtoolcache/pyenv_root/2.2.4/x64
-          key: pyenv-${{ env.cc_python_version }}
+      # Not currently working: installing pyenv does various other steps e.g. setting PYENV_ROOT
+      # - name: Set up pyenv cache
+      #   id: cache-pyenv
+      #   uses: actions/cache@v3.0.5
+      #   with:
+      #     path: /opt/hostedtoolcache/pyenv_root/2.2.4/x64
+      #     key: pyenv-${{ env.cc_python_version }}
 
       - name: Install pyenv
-        if: steps.cache-pyenv.outputs.cache-hit != 'true'
+        # if: steps.cache-pyenv.outputs.cache-hit != 'true'
         uses: "gabrielfalcao/pyenv-action@v9"
         with:
           default: ${{ env.cc_python_version }}
