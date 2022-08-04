@@ -177,18 +177,18 @@ jobs:
       # Towncrier & pre-commit require us to be in a repo
       # git init
 
-      - name: Towncrier
-        run: |
-          cd coefficient-project
-          pyenv local $(cat .python-version)
-          source $(cat .venv)/bin/activate
-          towncrier create 123.added --no-edit
-          towncrier build --version=999
-          less CHANGELOG.md
+      # - name: Towncrier
+      #   run: |
+      #     cd coefficient-project
+      #     pyenv local $(cat .python-version)
+      #     source $(cat .venv)/bin/activate
+      #     towncrier create 123.added --no-edit
+      #     towncrier build --version=999
+      #     less CHANGELOG.md
 
-      - name: pre-commit
-        run: |
-          cd coefficient-project
-          pyenv local $(cat .python-version)
-          source $(cat .venv)/bin/activate
-          pre-commit run --hook-stage=manual --show-diff-on-failure --all-files
+      # - name: pre-commit
+      #   run: |
+      #     cd coefficient-project
+      #     pyenv local $(cat .python-version)
+      #     source $(cat .venv)/bin/activate
+      #     pre-commit run --hook-stage=manual --show-diff-on-failure --all-files
