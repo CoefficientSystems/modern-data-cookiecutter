@@ -152,7 +152,7 @@ jobs:
         uses: actions/cache@v3.0.5
         with:
           path: ${{ env.cc_venv }}
-          key: ${{ env.cc_venv }}-${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}
+          key: ${{ env.cc_venv }}-${{ matrix.python-version }}-${{ hashFiles('coefficient-project/poetry.lock') }}
 
       - name: Install Poetry and Python dependencies
         run: |
@@ -182,11 +182,8 @@ jobs:
           cd coefficient-project
           pyenv local $(cat .python-version)
           source $(cat .venv)/bin/activate
-          # Test towncrier (if installed)
-          towncrier create 123.added --edit
-          # Write something, save, close
-          towncrier build --version=0.2
-          # Confirm your update is now in CHANGELOG.md
+          towncrier create 123.added --no-edit
+          towncrier build --version=999
           less CHANGELOG.md
 
       - name: pre-commit
