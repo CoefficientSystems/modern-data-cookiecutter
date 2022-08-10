@@ -35,7 +35,7 @@ jobs:
           which python
 
       - name: Set up Poetry cache
-        uses: actions/cache@v3.0.5
+        uses: actions/cache@v3.0.6
         with:
           path: venv
           key: venv-${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}
@@ -64,7 +64,7 @@ jobs:
           print("::set-output name=result::{}".format(result))
 
       - name: Restore pre-commit cache
-        uses: actions/cache@v3.0.5
+        uses: actions/cache@v3.0.6
         with:
           path: ~/.cache/pre-commit
           key: ${{ steps.pre-commit-cache.outputs.result }}-${{ hashFiles('.pre-commit-config.yaml') }}
@@ -84,11 +84,6 @@ jobs:
         run: |
           source venv/bin/activate
           pytest --ignore='{{cookiecutter.repo_name}}'
-
-      - name: Install cookiecutter
-        run: |
-          source venv/bin/activate
-          pipx install cookiecutter
 
   test:
     runs-on: ubuntu-latest
@@ -139,7 +134,7 @@ jobs:
           python -m pip install --upgrade pip
 
       - name: Set up Poetry cache
-        uses: actions/cache@v3.0.5
+        uses: actions/cache@v3.0.6
         with:
           path: ${{ env.cc_venv }}
           key: ${{ env.cc_venv }}-${{ matrix.python-version }}-${{ hashFiles('coefficient-project/poetry.lock') }}
