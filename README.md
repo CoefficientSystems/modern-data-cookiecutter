@@ -14,7 +14,7 @@
 [github actions page]: https://github.com/CoefficientSystems/coefficient-cookiecutter/actions/workflows/main.yaml?query=workflow%3ACI
 [pre-commit badge]: https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white
 [pre-commit project]: https://pre-commit.com/
-[python version badge]: https://img.shields.io/badge/python-3.9-blue
+[python version badge]: https://img.shields.io/badge/python-3.6%20%7C%203.7%20%7C%203.8%20%7C%203.9%20%7C%203.10-blue
 [status badge]: https://badgen.net/badge/status/alpha/d8624d
 
 <!-- badges-end -->
