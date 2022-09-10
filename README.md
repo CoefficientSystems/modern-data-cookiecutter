@@ -1,18 +1,9 @@
 # coefficient-cookiecutter
 
-Modern [Cookiecutter] template for Python-based data
-science/engineering/analytics projects. Made by [Coefficient].
-
-Inspired by:
-
-- [cookiecutter-data-science]
-- [cookiecutter-hypermodern-python]
-- [govcookiecutter]
-
 <!-- badges-begin -->
 
 [![Status][status badge]][status badge]
-[![Python Version][python version badge]]
+![Python Version][python version badge]
 [![Tests][github actions badge]][github actions page]
 [![pre-commit enabled][pre-commit badge]][pre-commit project]
 [![Black codestyle][black badge]][black project]
@@ -27,6 +18,15 @@ Inspired by:
 [status badge]: https://badgen.net/badge/status/alpha/d8624d
 
 <!-- badges-end -->
+
+Modern [Cookiecutter] template for Python-based data
+science/engineering/analytics projects. Made by [Coefficient].
+
+Inspired by:
+
+- [cookiecutter-data-science]
+- [cookiecutter-hypermodern-python]
+- [govcookiecutter]
 
 ## Usage
 
@@ -44,14 +44,14 @@ cookiecutter https://github.com/CoefficientSystems/coefficient-cookiecutter
 
 <!-- features-begin -->
 
-### Managing Python & Package Dependencies
+### 📦 Managing Python & Package Dependencies
 
 - Work across multiple Python versions using [pyenv]
 - Virtualenv management using [virtualenv] and [pyenv-virtualenv]
 - Packaging and dependency management with [Poetry]
 - Automated dependency upgrades with [poetryup] and [Dependabot]
 
-### Code Quality, Testing & CI
+### 👷 Code Quality, Testing & CI
 
 - Linting pre-configured using [pre-commit], [Flake8] and [pylint]
 - Code auto-formatting with [Black], [autoflake], [add-trailing-comma]
@@ -61,19 +61,19 @@ cookiecutter https://github.com/CoefficientSystems/coefficient-cookiecutter
 - Continuous integration with [GitHub Actions]
 - [Twelve Factor] app principles
 
-### Data Science
+### 🤖 Data Science
 
 - Jupyter Lab/Notebook configured with [jupyter-black] autoformatter
 - Directory structure designed [specifically for data science & analytics
   projects](https://drivendata.github.io/cookiecutter-data-science/#directory-structure) (adapted
   from [cookiecutter-data-science])
 
-### Security Features
+### 🔒 Security Features
 
 - Security audit with [pip-audit] and [detect-secrets]
 - Keep secrets & config out of code by loading as environment variables using [direnv]
 
-## Documentation, IDE Settings & Release Notes
+## 📚 Documentation, IDE Settings & Release Notes
 
 - Get started easily using [Getting Started]({{cookiecutter.repo_name}}/docs/getting_started.md) or
   the [Quickstart]({{cookiecutter.repo_name}}/docs/quickstart.md) with further documentation on how
