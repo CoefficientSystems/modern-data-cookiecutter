@@ -35,7 +35,7 @@ jobs:
           which python
 
       - name: Set up Poetry cache
-        uses: actions/cache@v3.0.6
+        uses: actions/cache@v3.0.8
         with:
           path: venv
           key: venv-${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}
@@ -64,7 +64,7 @@ jobs:
           print("::set-output name=result::{}".format(result))
 
       - name: Restore pre-commit cache
-        uses: actions/cache@v3.0.6
+        uses: actions/cache@v3.0.8
         with:
           path: ~/.cache/pre-commit
           key: ${{ steps.pre-commit-cache.outputs.result }}-${{ hashFiles('.pre-commit-config.yaml') }}
@@ -119,7 +119,7 @@ jobs:
       # TODO: This can be replaced I think with actions/setup-python?
 
       - name: Install pyenv
-        uses: "gabrielfalcao/pyenv-action@v9"
+        uses: "gabrielfalcao/pyenv-action@v10"
         with:
           default: ${{ env.cc_python_version }}
 
@@ -134,7 +134,7 @@ jobs:
           python -m pip install --upgrade pip
 
       - name: Set up Poetry cache
-        uses: actions/cache@v3.0.6
+        uses: actions/cache@v3.0.8
         with:
           path: ${{ env.cc_venv }}
           key: ${{ env.cc_venv }}-${{ matrix.python-version }}-${{ hashFiles('coefficient-project/poetry.lock') }}
