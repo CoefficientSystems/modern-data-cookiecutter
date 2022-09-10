@@ -35,7 +35,7 @@ jobs:
           which python
 
       - name: Set up Poetry cache
-        uses: actions/cache@v3.0.5
+        uses: actions/cache@v3.0.6
         with:
           path: venv
           key: venv-${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}
@@ -64,7 +64,7 @@ jobs:
           print("::set-output name=result::{}".format(result))
 
       - name: Restore pre-commit cache
-        uses: actions/cache@v3.0.5
+        uses: actions/cache@v3.0.6
         with:
           path: ~/.cache/pre-commit
           key: ${{ steps.pre-commit-cache.outputs.result }}-${{ hashFiles('.pre-commit-config.yaml') }}
@@ -84,3 +84,101 @@ jobs:
         run: |
           source venv/bin/activate
           pytest --ignore='{{cookiecutter.repo_name}}'
+
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      matrix:
+        python-version: [3.9]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install cookiecutter
+        run: |
+          which python
+          python -m pip install --constraint=.github/workflows/constraints.txt --upgrade pip
+          python -m pip install --user cookiecutter
+
+      - name: Initialise cookiecutter repo
+        run: |
+          cd ~
+          pwd
+          cookiecutter /home/runner/work/coefficient-cookiecutter/coefficient-cookiecutter --no-input
+          echo "cc_python_version=$(cat ~/coefficient-project/.python-version)"
+          echo "cc_python_version=$(cat ~/coefficient-project/.python-version)" >> $GITHUB_ENV
+          echo "cc_venv=$(cat ~/coefficient-project/.venv)"
+          echo "cc_venv=$(cat ~/coefficient-project/.venv)" >> $GITHUB_ENV
+
+      # TODO: This can be replaced I think with actions/setup-python?
+
+      - name: Install pyenv
+        uses: "gabrielfalcao/pyenv-action@v10"
+        with:
+          default: ${{ env.cc_python_version }}
+
+      - name: Create cookiecuttered Python environment
+        run: |
+          cd ~/coefficient-project
+          pwd
+          pyenv local $(cat .python-version)
+          python -V
+          python -m venv $(cat .venv)
+          python -V
+          python -m pip install --upgrade pip
+
+      - name: Set up Poetry cache
+        uses: actions/cache@v3.0.6
+        with:
+          path: ${{ env.cc_venv }}
+          key: ${{ env.cc_venv }}-${{ matrix.python-version }}-${{ hashFiles('coefficient-project/poetry.lock') }}
+
+      - name: Install Poetry and Python dependencies
+        run: |
+          cd ~/coefficient-project
+          pyenv local $(cat .python-version)
+          source $(cat .venv)/bin/activate
+          curl -sSL https://install.python-poetry.org | python3 -
+          poetry --version
+          poetry config virtualenvs.in-project true
+          poetry config virtualenvs.create false
+          poetry config virtualenvs.path $(cat .venv)
+          which python
+          poetry install --no-root
+
+      - name: pytest
+        run: |
+          cd ~/coefficient-project
+          pyenv local $(cat .python-version)
+          source $(cat .venv)/bin/activate
+          pytest
+
+      - name: Towncrier
+        run: |
+          cd ~/coefficient-project
+          pyenv local $(cat .python-version)
+          source $(cat .venv)/bin/activate
+          git init
+          towncrier create 123.added --no-edit
+          towncrier build --version=999 --yes
+          less CHANGELOG.md
+
+      - name: pre-commit
+        run: |
+          cd ~/coefficient-project
+          pyenv local $(cat .python-version)
+          source $(cat .venv)/bin/activate
+          detect-secrets --verbose scan \
+            --exclude-files 'poetry\.lock' \
+            --exclude-files '\.secrets\.baseline' \
+            --exclude-files '\.env\.template' \
+            --exclude-secrets 'password|ENTER_PASSWORD_HERE|INSERT_API_KEY_HERE' \
+            --exclude-lines 'integrity=*sha' \
+            > .secrets.baseline
+          pre-commit run --hook-stage=manual --show-diff-on-failure --all-files
