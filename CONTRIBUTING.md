@@ -57,7 +57,7 @@ python -V  # check this is the correct version of Python
 mkvirtualenv $(cat .venv)
 python -V  # check this is the correct version of Python
 python -m pip install --upgrade pip
-poetry install --no-root --remove-untracked
+poetry install --no-root --sync
 
 # Run tests
 pytest
