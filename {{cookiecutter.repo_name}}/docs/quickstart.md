@@ -32,7 +32,7 @@ python -m pip install --upgrade pip
 
 # Install dependencies with Poetry
 poetry self update
-poetry install --no-root --remove-untracked
+poetry install --no-root --sync
 
 # Create templated .env for storing secrets
 cp .env.template .env

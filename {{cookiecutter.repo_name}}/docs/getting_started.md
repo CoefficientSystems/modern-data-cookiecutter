@@ -101,7 +101,7 @@ process it will be installed isolated from the rest of your system.
 poetry self update
 
 # This command should be run inside the virtualenv.
-poetry install --no-root --remove-untracked
+poetry install --no-root --sync
 ```
 
 
