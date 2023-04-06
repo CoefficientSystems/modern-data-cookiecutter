@@ -78,10 +78,10 @@ git branch -D release/VERSION
 
 ## 2. GitHub Steps
 
-  - Copy the **raw markdown** for the release notes in CHANGELOG: https://github.com/CoefficientSystems/c459-opg/blob/main/CHANGELOG.md
-  - Once you've pushed the tag, you will see it on this page: https://github.com/CoefficientSystems/c459-opg/tags
+  - Copy the **raw markdown** for the release notes in CHANGELOG: [https://github.com/CoefficientSystems/coefficient-cookiecutter/blob/main/CHANGELOG.md]
+  - Once you've pushed the tag, you will see it on this page: [https://github.com/CoefficientSystems/coefficient-cookiecutter/tags]
   - Edit the tag and add the release notes
-  - You will then see the release appear here: https://github.com/CoefficientSystems/c459-opg/releases
+  - You will then see the release appear here: [https://github.com/CoefficientSystems/coefficient-cookiecutter/releases]
   - This also sends an email update to anyone on the team who has subscribed containing formatted release notes.
   - Once the release is created, edit the release and assign the milestone to the release. Save changes.
 
