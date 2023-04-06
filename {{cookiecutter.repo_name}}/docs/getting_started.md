@@ -119,7 +119,23 @@ plugins=(git autoswitch_virtualenv)
 Check it's working by cd-ing into & out of the repo. The environment should load & unload respectively.
 
 
-## 6. Add secrets into .env
+## 6. Install [Poetry Up](https://github.com/MousaZeidBaker/poetry-plugin-up)
+
+This is a useful Poetry plugin that updates dependencies and bumps their versions in the
+pyproject.toml file. The version constraints are respected, unless the `--latest` flag is passed, in
+which case dependencies are updated to latest available compatible versions.
+
+```sh
+# Installation
+poetry self add poetry-plugin-up
+
+# Usage
+poetry up
+poetry up --latest
+```
+
+
+## 7. Add secrets into .env
 
   - Run `cp .env.template .env` and update the secrets.
   - [Install direnv](https://direnv.net/) to autoload environment variables specified in `.env`
@@ -128,7 +144,7 @@ Check it's working by cd-ing into & out of the repo. The environment should load
     command whenever you change `.env`)
 
 
-## 7. Initialise the `detect-secrets` pre-commit hook
+## 8. Initialise the `detect-secrets` pre-commit hook
 
 We use [`detect-secrets`](https://github.com/Yelp/detect-secrets) to check that no secrets are
 accidentally committed. Please read [docs/detect_secrets.md](docs/detect_secrets.md) for more information.
@@ -157,6 +173,6 @@ whether this is the case. This allows the hook to remember false positives in th
 you to new secrets.
 
 
-## 8. Project-specific setup
+## 9. Project-specific setup
 
 Please check [docs/project_specific_setup.md](docs/project_specific_setup.md) for further instructions.

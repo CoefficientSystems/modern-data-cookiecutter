@@ -28,12 +28,13 @@ gcloud config set project {{ cookiecutter.virtualenv }}
 brew install tealdeer
 tldr gcloud
 ```
-{% endif %}
 
+{% endif %}
 {% if cookiecutter.use_jupyter == 'y' -%}
 ## Jupyter kernel
 
 ```sh
 python -m ipykernel install --user --name {{ cookiecutter.virtualenv }} --display-name "Python ({{ cookiecutter.virtualenv }})"
 ```
+
 {% endif %}

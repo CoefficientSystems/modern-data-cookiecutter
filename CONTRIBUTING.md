@@ -2,23 +2,25 @@
 
 Your contributions to coefficient-cookiecutter are very welcome, and credit will always be given.
 
+
 ## How to request a feature
 
 Request features on the [Issue Tracker].
+
 
 ## How to report a bug
 
 Report bugs on the [Issue Tracker].
 
 When filing an issue, make sure to answer these questions:
-
-- Which operating system and Python version are you using?
-- Which version of this project are you using?
-- What did you do?
-- What did you expect to see?
-- What did you see instead?
+    - Which operating system and Python version are you using?
+    - Which version of this project are you using?
+    - What did you do?
+    - What did you expect to see?
+    - What did you see instead?
 
 The best way to get your bug fixed is to provide a test case, and/or steps to reproduce the issue.
+
 
 ## How to set up your development environment
 
@@ -42,6 +44,7 @@ Follow the instructions below for a full test including installing cookiecutter,
 project using this cookiecutter, initialising a Python environment including a Poetry-controlled
 virtualenv based on the Python version specified during cookiecutter configuration, installing
 packages, running the test suite, adding a Towncrier update, and running pre-commit.
+
 
 ## How to test the project
 
@@ -82,17 +85,32 @@ cd ..
 rm -r ./coefficient-project
 ```
 
+
 ## How to submit changes
 
 Please open a [pull request] to submit changes to this project. Your pull request needs to meet the
 following guidelines for acceptance:
-
-- The GitHub Actions CI test suite must pass.
-- Please add a Towncrier entry if appropriate, you can check `docs/using_towncrier.md` for guidance.
-- If your changes add functionality, update the documentation accordingly.
+    - The GitHub Actions CI test suite must pass.
+    - Please add a Towncrier entry if appropriate, you can check `docs/using_towncrier.md` for guidance.
+    - If your changes add functionality, update the documentation accordingly.
 
 It is recommended to open an issue before starting work on anything. This will allow a chance to
 talk it over with the owners and validate your approach.
+
+
+## Tip: How to bump the default Python version
+
+1. Check the latest Python version available via [https://www.python.org/downloads/]. This repo's
+   Python version is specified in `.python-version`, whilst the default cookiecutter Python version
+   is specified in `cookiecutter.json`. These do not have to be the same, although it's recommended
+   to keep them close to each other. The only constraint for the repo `.python-version` is that it
+   must be supported by the latest `pyenv`.
+2. The default cookiecutter Python must be supported by whichever version of `pyenv` is used by
+   `pyenv-action`. Check the latest pyenv version supported by [https://github.com/gabrielfalcao/pyenv-action/releases].
+3. Check which Python versions are supported by this `pyenv` version by going to
+   [https://github.com/pyenv/pyenv/releases] and finding the corresponding version of this file:
+   [https://github.com/pyenv/pyenv/tree/v2.3.12/plugins/python-build/share/python-build]
+
 
 [github]: https://github.com/CoefficientSystems/coefficient-cookiecutter/
 [issue tracker]: https://github.com/CoefficientSystems/coefficient-cookiecutter/issues

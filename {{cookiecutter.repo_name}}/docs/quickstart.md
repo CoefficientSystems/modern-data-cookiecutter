@@ -10,6 +10,7 @@ We assume the following are installed and configured:
   - [Poetry](https://python-poetry.org/docs/)
   - [zsh-autoswitch-virtualenv](https://github.com/MichaelAquilina/zsh-autoswitch-virtualenv)
   - [direnv](https://direnv.net/)
+  - [poetry up](https://github.com/MousaZeidBaker/poetry-plugin-up)
 
 
 ## Part 1: Generic Python setup
@@ -54,4 +55,4 @@ detect-secrets audit .secrets.baseline
 
 ## Part 2: Project-specific setup
 
-Please check [docs/project_specific_setup.md](docs/project_specific_setup.md) for further instructions.
+Please check [docs/project_specific_setup.md](project_specific_setup.md) for further instructions.
