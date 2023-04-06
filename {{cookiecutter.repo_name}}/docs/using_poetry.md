@@ -13,7 +13,7 @@ created/managed virtualenv).
 
 ```bash
 # Sync your environment with poetry.lock
-poetry install --no-root --remove-untracked
+poetry install --no-root --sync
 
 # Add and install a new package into your environment (or update an existing one)
 # 1. Add a package to pyproject.toml
@@ -35,12 +35,12 @@ poetry export -f requirements.txt --output requirements.txt
 ## Poetry FAQ
 
 **How do I sync my environment with the latest `poetry.lock`?**
-To install dependencies, simply `cd backend-security` and run `poetry install --no-root --remove-untracked`.
+To install dependencies, simply `cd backend-security` and run `poetry install --no-root --sync`.
 This will resolve & install all deps in `pyproject.toml` via `poetry.lock`. Options:
   - `--no-root` skips installing the repo itself as a Python package
-  - `--remove-untracked` removes old dependencies no longer present in the lock file
+  - `--sync` removes old dependencies no longer present in the lock file
 
-You may wish to set an alias e.g. `alias poetry-sync='poetry install --no-root --remove-untracked'`
+You may wish to set an alias e.g. `alias poetry-sync='poetry install --no-root --sync'`
 
 **How do I add/change packages?**
 In order to install a new package or remove an old one, please edit `pyproject.toml`

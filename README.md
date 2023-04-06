@@ -23,10 +23,10 @@ Modern [Cookiecutter] template for Python-based data
 science/engineering/analytics projects. Made by [Coefficient].
 
 Inspired by:
+  - [cookiecutter-data-science]
+  - [cookiecutter-hypermodern-python]
+  - [govcookiecutter]
 
-- [cookiecutter-data-science]
-- [cookiecutter-hypermodern-python]
-- [govcookiecutter]
 
 ## Usage
 
@@ -40,47 +40,44 @@ cookiecutter https://github.com/CoefficientSystems/coefficient-cookiecutter
 # Follow instructions in docs/getting_started.md or docs/quickstart.md
 ```
 
+
 ## Features
 
 <!-- features-begin -->
 
 ### 📦 Managing Python & Package Dependencies
-
-- Work across multiple Python versions using [pyenv]
-- Virtualenv management using [virtualenv] and [pyenv-virtualenv]
-- Packaging and dependency management with [Poetry]
-- Automated dependency upgrades with [poetryup] and [Dependabot]
+  - Work across multiple Python versions using [pyenv]
+  - Virtualenv management using [virtualenv] and [pyenv-virtualenv]
+  - Packaging and dependency management with [Poetry]
+  - Automated dependency upgrades with [poetry-plugin-up] and [Dependabot]
 
 ### 👷 Code Quality, Testing & CI
-
-- Linting pre-configured using [pre-commit], [Flake8] and [pylint]
-- Code auto-formatting with [Black], [autoflake], [add-trailing-comma]
-- Import sorting with [isort]
-- Automated Python syntax upgrades with [pyupgrade]
-- Testing with [pytest]
-- Continuous integration with [GitHub Actions]
-- [Twelve Factor] app principles
+  - Linting pre-configured using [pre-commit], [Flake8] and [pylint]
+  - Code auto-formatting with [Black], [autoflake], [add-trailing-comma]
+  - Import sorting with [isort]
+  - Automated Python syntax upgrades with [pyupgrade]
+  - Testing with [pytest]
+  - Continuous integration with [GitHub Actions]
+  - [Twelve Factor] app principles
 
 ### 🤖 Data Science
-
-- Jupyter Lab/Notebook configured with [jupyter-black] autoformatter
-- Directory structure designed [specifically for data science & analytics
-  projects](https://drivendata.github.io/cookiecutter-data-science/#directory-structure) (adapted
-  from [cookiecutter-data-science])
+  - Jupyter Lab/Notebook configured with [jupyter-black] autoformatter
+  - Directory structure designed [specifically for data science & analytics
+    projects](https://drivendata.github.io/cookiecutter-data-science/#directory-structure) (adapted
+    from [cookiecutter-data-science])
 
 ### 🔒 Security Features
+  - Security audit with [pip-audit] and [detect-secrets]
+  - Keep secrets & config out of code by loading as environment variables using [direnv]
 
-- Security audit with [pip-audit] and [detect-secrets]
-- Keep secrets & config out of code by loading as environment variables using [direnv]
 
 ## 📚 Documentation, IDE Settings & Release Notes
-
-- Get started easily using [Getting Started]({{cookiecutter.repo_name}}/docs/getting_started.md) or
-  the [Quickstart]({{cookiecutter.repo_name}}/docs/quickstart.md) with further documentation on how
-  to use the packages in this cookiecutter available in [docs/]({{cookiecutter.repo_name}}/docs/)
-- [VS Code Settings] configures features like "Format on save", isort configuration, bracket pair
-  colorization, Pylance and mypy alongside recommended extensions
-- Automated release notes using [towncrier]
+  - Get started easily using [Getting Started]({{cookiecutter.repo_name}}/docs/getting_started.md) or
+    the [Quickstart]({{cookiecutter.repo_name}}/docs/quickstart.md) with further documentation on how
+    to use the packages in this cookiecutter available in [docs/]({{cookiecutter.repo_name}}/docs/)
+  - [VS Code Settings] configures features like "Format on save", isort configuration, bracket pair
+    colorization, Pylance and mypy alongside recommended extensions
+  - Automated release notes using [towncrier]
 
 <!-- features-end -->
 
@@ -106,7 +103,7 @@ issues, setup a development environment, test this cookiecutter and contribute t
 [jupyter-black]: https://pypi.org/project/jupyter-black/
 [pip-audit]: https://pypi.org/project/pip-audit/
 [poetry]: https://python-poetry.org/
-[poetryup]: https://pypi.org/project/poetryup/
+[poetry-plugin-up]: https://github.com/MousaZeidBaker/poetry-plugin-up
 [pre-commit]: https://pre-commit.com/
 [pyenv-virtualenv]: https://github.com/pyenv/pyenv-virtualenv
 [pyenv]: https://github.com/pyenv/pyenv

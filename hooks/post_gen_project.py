@@ -14,7 +14,6 @@ PROJECT_DIRECTORY = Path(".")
 
 
 if __name__ == "__main__":
-
     # Rename templated files
     os.rename(PROJECT_DIRECTORY / "pyproject.template.toml", PROJECT_DIRECTORY / "pyproject.toml")
     os.rename(
