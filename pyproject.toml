@@ -5,7 +5,7 @@
 ###########
 [tool.poetry]
 name = "coefficient-cookiecutter"
-version = "0.2.1"
+version = "0.2.2"
 description = ""
 authors = ["John Sandall <contact@coefficient.ai>"]
 license = "UNLICENSED"
