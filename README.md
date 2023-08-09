@@ -1,4 +1,4 @@
-# coefficient-cookiecutter
+# Modern Data Cookiecutter
 
 <!-- badges-begin -->
 
@@ -10,8 +10,8 @@
 
 [black badge]: https://img.shields.io/badge/code%20style-black-000000.svg
 [black project]: https://github.com/psf/black
-[github actions badge]: https://github.com/CoefficientSystems/coefficient-cookiecutter/actions/workflows/main.yaml/badge.svg
-[github actions page]: https://github.com/CoefficientSystems/coefficient-cookiecutter/actions/workflows/main.yaml?query=workflow%3ACI
+[github actions badge]: https://github.com/CoefficientSystems/modern-data-cookiecutter/actions/workflows/main.yaml/badge.svg
+[github actions page]: https://github.com/CoefficientSystems/modern-data-cookiecutter/actions/workflows/main.yaml?query=workflow%3ACI
 [pre-commit badge]: https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white
 [pre-commit project]: https://pre-commit.com/
 [python version badge]: https://img.shields.io/badge/python-3.6%20%7C%203.7%20%7C%203.8%20%7C%203.9%20%7C%203.10-blue
@@ -20,7 +20,7 @@
 <!-- badges-end -->
 
 Modern [Cookiecutter] template for Python-based data
-science/engineering/analytics projects. Made by [Coefficient].
+science/engineering/analytics projects. Created by [Coefficient].
 
 Inspired by:
   - [cookiecutter-data-science]
@@ -35,7 +35,7 @@ Inspired by:
 pipx install cookiecutter
 
 # Install the latest release directly from this repo
-cookiecutter https://github.com/CoefficientSystems/coefficient-cookiecutter
+cookiecutter https://github.com/CoefficientSystems/modern-data-cookiecutter
 
 # Follow instructions in docs/getting_started.md or docs/quickstart.md
 ```
