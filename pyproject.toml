@@ -40,6 +40,7 @@ build-backend = "poetry.core.masonry.api"
 line-length = 100
 indent-width = 4
 target-version = "py312"
+extend-include = ["*.ipynb"]
 
 [tool.ruff.lint]
 select = [
