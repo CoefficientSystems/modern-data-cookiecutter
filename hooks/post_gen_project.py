@@ -12,13 +12,11 @@ from pathlib import Path
 
 PROJECT_DIRECTORY = Path()
 
-
 if __name__ == "__main__":
     # Rename templated files
-    os.rename(PROJECT_DIRECTORY / "pyproject.template.toml", PROJECT_DIRECTORY / "pyproject.toml")
-    os.rename(
-        PROJECT_DIRECTORY / ".pre-commit-config.template.yaml",
-        PROJECT_DIRECTORY / ".pre-commit-config.yaml",
+    (PROJECT_DIRECTORY / "pyproject.template.toml").rename(PROJECT_DIRECTORY / "pyproject.toml")
+    (PROJECT_DIRECTORY / ".pre-commit-config.template.yaml").rename(
+        PROJECT_DIRECTORY / ".pre-commit-config.yaml"
     )
 
     # Copy .env.template -> .env
@@ -30,12 +28,12 @@ if __name__ == "__main__":
     if "{{ cookiecutter.use_github_actions }}" != "y":
         try:
             shutil.rmtree(PROJECT_DIRECTORY / ".github" / "workflows")
-        except Exception as error_message:  # pylint: disable=broad-except
-            logging.error(error_message)
+        except Exception:  # pylint: disable=broad-except
+            logging.exception("failed to delete .github/workflows")
 
         # Don't need .github if using neither GitHub Actions nor dependabot
         if "{{ cookiecutter.use_dependabot }}" != "y":
             try:
                 shutil.rmtree(PROJECT_DIRECTORY / ".github")
-            except Exception as error_message:  # pylint: disable=broad-except
-                logging.error(error_message)
+            except Exception:  # pylint: disable=broad-except
+                logging.exception("failed to delete .github")
