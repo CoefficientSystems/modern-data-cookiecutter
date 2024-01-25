@@ -110,7 +110,7 @@ jobs:
         run: |
           cd ~
           pwd
-          cookiecutter /home/runner/work/coefficient-cookiecutter/coefficient-cookiecutter --no-input
+          cookiecutter $GITHUB_WORKSPACE --no-input
           echo "cc_python_version=$(cat ~/coefficient-project/.python-version)"
           echo "cc_python_version=$(cat ~/coefficient-project/.python-version)" >> $GITHUB_ENV
           echo "cc_venv=$(cat ~/coefficient-project/.venv)"
