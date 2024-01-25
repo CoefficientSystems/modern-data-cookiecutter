@@ -12,37 +12,22 @@ license = "UNLICENSED"
 classifiers = ["Private :: Do Not Upload"]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.12"
 # Everything below here is alphabetically sorted
 cookiecutter = "^2.1.1"
 mypy = "^1.3.0"
-requests = "<2.30.0"
+requests = "^2.31.0"
 
 [tool.poetry.dev-dependencies]
 # Everything below here is alphabetically sorted
-bandit = "^1.7.5"
-black = "^23.3.0"
 detect-secrets = "1.2.0"
-flake8 = "5.0.4"
-flake8-bugbear = "^23.3.12"
-flake8-comprehensions = "^3.12.0"
-flake8-docstrings = "^1.7.0"
-flake8-eradicate = "^1.4.0"
-flake8-fixme = "^1.1.1"
-flake8-implicit-str-concat = "^0.4.0"
-flake8-mutable = "^1.2.0"
-flake8-no-pep420 = "^2.4.0"
-flake8-print = "^5.0.0"
-flake8-return = "^1.2.0"
-flake8-simplify = "^0.20.0"
 ipdb = "^0.13.13"
-isort = "^5.12.0"
-jupyter-black = "^0.3.4"
 pip-audit = "^2.5.5"
 pre-commit = "^3.3.2"
 pylint = "^2.17.4"
 pytest = "^7.3.1"
 towncrier = "^22.12.0"
+ruff = "^0.1.14"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -51,34 +36,80 @@ build-backend = "poetry.core.masonry.api"
 ############
 # ✅ Linters
 ############
-[tool.black]
+[tool.ruff]
 line-length = 100
-target-version = ['py39']
+indent-width = 4
+target-version = "py312"
+extend-include = ["*.ipynb"]
 
-[tool.isort]
-profile = "black"
-line_length = 100
-default_section = "THIRDPARTY"
-sections = "FUTURE,STDLIB,THIRDPARTY,FIRSTPARTY,LOCALFOLDER"
-add_imports = "from __future__ import annotations"
+[tool.ruff.lint]
+select = [
+  "A",
+  "AIR",
+  "ARG",
+  "B",
+  "C4",
+  "C90",
+  "COM",
+  # "CPY",
+  "D",
+  "DJ",
+  "DTZ",
+  "E",
+  # "E4", "E7", "E9",
+  "ERA",
+  "EXE",
+  "F",
+  "FA",
+  "FIX",
+  "FLY",
+  # "FURB",
+  "G",
+  "I",
+  "ICN",
+  "INP",
+  "INT",
+  "ISC",
+  # "LOG",
+  "N",
+  "NPY",
+  "PD",
+  "PERF",
+  "PGH",
+  "PIE",
+  "PL",
+  "PT",
+  "PTH",
+  "PYI",
+  "Q",
+  "RET",
+  "RSE",
+  "RUF",
+  "SIM",
+  "SLF",
+  "SLOT",
+  "T10",
+  "T20",
+  "TCH",
+  "TD",
+  "TID",
+  "TRY",
+  "UP",
+  "W",
+]
+fixable = ["ALL"]
+ignore = [
+    "INP001", # File `hooks/post_gen_project.py` is part of an implicit namespace package. Add an `__init__.py`.
+    "PLR0133", # Two constants compared in a comparison, consider replacing `"{{ cookiecutter.use_github_actions }}" != "y"`
+    "G004", # Logging statement uses f-string
+]
 
-[tool.pylint.MASTER]
-ignore-paths = [".git", "{{cookiecutter.repo_name}}"]
-load-plugins = []
+[tool.ruff.lint.pydocstyle]
+convention = "pep257"
 
-[tool.pylint."MESSAGES CONTROL"]
-enable = "all"
-max-module-lines = 2000
-max-line-length = 100
-max-locals = 50
-min-similarity-lines = 150
-max-statements = 89
-max-args = 22
-max-branches = 17
-# good-names = []
-# disable = []
-logging-format-style = "new"
-
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
 ##############
 # 📣 Towncrier
 ##############

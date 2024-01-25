@@ -2,11 +2,11 @@
 #   $ pre-commit autoupdate
 minimum_pre_commit_version: 3.3.2
 default_language_version:
-  python: python3.11
+  python: python3.12
 exclude: "{{cookiecutter.repo_name}}"
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v4.5.0
     hooks:
       - id: end-of-file-fixer
         name: Check for a blank line at the end of scripts (auto-fixes)
@@ -32,60 +32,19 @@ repos:
       - id: check-docstring-first
       - id: name-tests-test
         args: ["--django"]
-  - repo: https://github.com/myint/autoflake
-    rev: v2.1.1
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.1.14
     hooks:
-      - id: autoflake
-        args: &autoflake
-          - --in-place
-          - --remove-all-unused-imports
-          - --expand-star-imports
-          - --remove-duplicate-keys
-          - --remove-unused-variables
-  - repo: https://github.com/pycqa/flake8
-    rev: 5.0.4
-    hooks:
-      - &flake8
-        id: flake8
-        additional_dependencies:
-          - flake8-bugbear==23.3.12
-          - flake8-comprehensions==3.12.0
-          - flake8-docstrings==1.7.0
-          - flake8-eradicate==1.4.0
-          - flake8-fixme==1.1.1
-          - flake8-implicit-str-concat==0.4.0
-          - flake8-mutable==1.2.0
-          - flake8-no-pep420==2.4.0
-          - flake8-print==5.0.0
-          - flake8-return==1.2.0
-          - flake8-simplify==0.19.3
-        args: ["--config=setup.cfg"]
-  - repo: https://github.com/psf/black
-    rev: 23.3.0
-    hooks:
-      - id: black
-  - repo: https://github.com/asottile/add-trailing-comma
-    rev: v2.4.0
-    hooks:
-      - id: add-trailing-comma
-        args: [--py36-plus]
-  - repo: https://github.com/pycqa/isort
-    rev: 5.12.0
-    hooks:
-      - id: isort
-        name: isort (python)
-        types: [python]
-  - repo: https://github.com/asottile/pyupgrade
-    rev: v3.4.0
-    hooks:
-      - id: pyupgrade
-        args:
-          - "--py311-plus"
-  - repo: https://github.com/pycqa/bandit
-    rev: 1.7.5
-    hooks:
-      - id: bandit
-        args: ["-ii", "-ll"]
+      # Run the formatter.
+      - id: ruff-format
+        types_or: [python, pyi, jupyter]
+
+      # Run the linter.
+      - id: ruff
+        types_or: [python, pyi, jupyter]
+        args: [--fix]
+
   - repo: https://github.com/Yelp/detect-secrets
     rev: v1.4.0
     hooks:
@@ -126,7 +85,7 @@ repos:
   #           "--without-hashes",
   #         ]
   - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v3.0.0-alpha.9-for-vscode
+    rev: v4.0.0-alpha.8
     hooks:
       - id: prettier
         types_or: [yaml]
@@ -134,15 +93,6 @@ repos:
           - "prettier@2.8.4"
   - repo: local
     hooks:
-      - id: pylint
-        name: pylint
-        entry: pylint {{cookiecutter.repo_name}} tests
-        # entry: bash -c 'pylint ./path/package1/; pylint ./path/package2/'
-        language: system
-        types: [python]
-        always_run: true
-        pass_filenames: false
-        stages: [manual]
       - id: pip-audit
         name: pip-audit
         entry: pip-audit
