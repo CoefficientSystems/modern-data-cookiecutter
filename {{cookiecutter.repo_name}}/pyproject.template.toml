@@ -38,7 +38,7 @@ build-backend = "poetry.core.masonry.api"
 # ✅ Linters
 ############
 [tool.ruff]
-line-length = {{ cookicutter.line_length }}
+line-length = {{ cookiecutter.line_length }}
 indent-width = 4
 target-version = "py{{ "".join(cookiecutter.python_version.split('.')[:2]) }}"
 extend-include = ["*.ipynb"]
