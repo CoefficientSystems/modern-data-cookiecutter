@@ -10,7 +10,7 @@ import os
 import shutil
 from pathlib import Path
 
-PROJECT_DIRECTORY = Path(".")
+PROJECT_DIRECTORY = Path()
 
 
 if __name__ == "__main__":
