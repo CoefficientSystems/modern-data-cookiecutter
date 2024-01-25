@@ -1,0 +1,3 @@
+Upgraded to Python 3.12.1
+Switched from flake8 to ruff
+Regenerated poetry.lock
