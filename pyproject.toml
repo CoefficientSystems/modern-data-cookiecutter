@@ -98,6 +98,11 @@ select = [
   "W",
 ]
 fixable = ["ALL"]
+ignore = [
+    "INP001", # File `hooks/post_gen_project.py` is part of an implicit namespace package. Add an `__init__.py`.
+    "PLR0133", # Two constants compared in a comparison, consider replacing `"{{ cookiecutter.use_github_actions }}" != "y"`
+    "G004", # Logging statement uses f-string
+]
 
 [tool.ruff.lint.pydocstyle]
 convention = "pep257"
