@@ -12,7 +12,7 @@ license = "UNLICENSED"
 classifiers = ["Private :: Do Not Upload"]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.12"
 # Everything below here is alphabetically sorted
 cookiecutter = "^2.1.1"
 mypy = "^1.3.0"
