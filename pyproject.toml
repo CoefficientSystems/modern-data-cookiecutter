@@ -99,6 +99,9 @@ select = [
 ]
 fixable = ["ALL"]
 
+[tool.ruff.lint.pydocstyle]
+convention = "pep257"
+
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
