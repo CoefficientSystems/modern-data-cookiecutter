@@ -16,5 +16,7 @@
   "use_dependabot": "y",
   "repo_url": "https://github.com/username/repo",
   "issue_url": "https://github.com/username/repo/issues/",
-  "_copy_without_render": ["*.changelog/template.md"]
+  "_copy_without_render": [
+    "*.changelog/template.md"
+  ]
 }

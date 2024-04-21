@@ -75,6 +75,14 @@ towncrier build --version=0.2
 # Confirm your update is now in CHANGELOG.md
 
 # Test out pre-commit
+detect-secrets --verbose scan \
+    --exclude-files 'poetry\.lock' \
+    --exclude-files '\.secrets\.baseline' \
+    --exclude-files '\.env\.template' \
+    --exclude-secrets 'password|ENTER_PASSWORD_HERE|INSERT_API_KEY_HERE' \
+    --exclude-lines 'integrity=*sha' \
+    > .secrets.baseline
+
 pre-commit run --all-files --hook-stage=manual --show-diff-on-failure
 
 # Clean up

@@ -20,12 +20,11 @@ python = "^{{ cookiecutter.python_version }}"
 
 [tool.poetry.dev-dependencies]
 # Everything below here is alphabetically sorted
-bandit = "^1.7.5"
 detect-secrets = "1.2.0"
 ipdb = "^0.13.13"
 pip-audit = "^2.5.5"
-pre-commit = "^3.3.2"
-pytest = "^7.3.1"
+pre-commit = "^3.3.3"
+pytest = "^7.4.0"
 ruff = "^0.1.14"
 {% if cookiecutter.use_towncrier == 'y' -%}
 towncrier = "^22.12.0"{% endif %}
