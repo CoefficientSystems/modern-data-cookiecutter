@@ -4,6 +4,7 @@
         "ms-python.vscode-pylance",
         "esbenp.prettier-vscode",
         "wayou.vscode-todo-highlight",
-        "bungcip.better-toml"
+        "bungcip.better-toml",
+        "charliermarsh.ruff",
     ]
 }
