@@ -39,17 +39,7 @@ poetry install --no-root --sync
 cp .env.template .env
 direnv allow
 
-# Create and audit secrets baseline
-# N.B. Adjust the exclusions here depending on your needs (check .pre-commit-config.yaml)
-detect-secrets --verbose scan \
-    --exclude-files 'poetry\.lock' \
-    --exclude-files '\.secrets\.baseline' \
-    --exclude-files '\.env\.template' \
-    --exclude-secrets 'password|ENTER_PASSWORD_HERE|INSERT_API_KEY_HERE' \
-    --exclude-lines 'integrity=*sha' \
-    > .secrets.baseline
-
-detect-secrets audit .secrets.baseline
+# Manually audit ripsecrets .secretsignore see https://github.com/sirwart/ripsecrets?tab=readme-ov-file#ignoring-secrets
 ```
 
 

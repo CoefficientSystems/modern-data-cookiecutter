@@ -1,9 +1,9 @@
-# Using the `detect-secrets` pre-commit hook
+# Using the `ripsecrets` pre-commit hook
 
-[We use `detect-secrets` to check that no secrets are accidentally committed](detect-secrets). The
-`detect-secrets` package does its best to prevent accidental committing of secrets, but it may miss
+[We use `ripsecrets` to check that no secrets are accidentally committed](ripsecrets). The
+`ripsecrets` package does its best to prevent accidental committing of secrets, but it may miss
 things. Instead, focus on good software development practices! See the [definition of a secret for
-further information](#definition-of-a-secret-according-to-detect-secrets).
+further information](#definition-of-a-secret).
 
 
 ## Initial setup
@@ -27,22 +27,9 @@ whether this is the case. This allows the hook to remember false positives in th
 you to new secrets.
 
 
-## Definition of a "secret" according to `detect-secrets`
+## Definition of a "secret"
 
-The `detect-secrets` documentation, as of January 2021, says it works:
-
-> ...by running periodic diff outputs against heuristically crafted \[regular
-> expression\] statements, to identify whether any new secret has been committed.
-
-This means it uses regular expression patterns to scan your code changes for anything that looks
-like a secret according to the patterns. By definition, there are only a limited number of
-patterns, so the `detect-secrets` package cannot detect every conceivable type of secret.
-
-To understand what types of secrets will be detected, read the `detect-secrets` documentation on
-caveats, and the list of supported plugins. Also, you should use secret variable names with words
-that will trip the KeywordDetector plugin; see the
-[`DENYLIST` variable for the full list of words][detect-secrets-keyword-detector].
-
+See https://github.com/sirwart/ripsecrets?tab=readme-ov-file#how-it-works
 
 ## If `pre-commit` detects secrets during commit
 
@@ -53,7 +40,7 @@ If the detected secret is a false positive, there are two options to resolve thi
 commit from being blocked:
 
 - [inline allowlisting of false positives (recommended)](#inline-allowlisting-recommended); or
-- [updating the `.secrets.baseline` to include the false positives](#updating-secretsbaseline).
+- [updating the `.secretsignore` to include the false positives](#updating-secretsignore).
 
 In either case, if an actual secret is detected (or a combination of actual secrets and false
 positives), first remove the actual secret. Then following either of these processes.
@@ -66,13 +53,6 @@ To exclude a false positive, add a `pragma` comment such as:
 secret = "Password123"  # pragma: allowlist secret
 ```
 
-or
-
-```python
-#  pragma: allowlist nextline secret
-secret = "Password123"
-```
-
 If the detected secret is actually a secret (or other sensitive information), remove the secret and
 re-commit; there is no need to add any `pragma` comments.
 
@@ -80,21 +60,20 @@ If your commit contains a mixture of false positives and actual secrets, remove 
 first before adding `pragma` comments to the false positives.
 
 
-### Updating `.secrets.baseline`
+### Updating `.secretsignore`
 
-To exclude a false positive, you can also [update the `.secrets.baseline` by repeating the same two
-commands as in the initial setup](#using-the-detect-secrets-pre-commit-hook).
+To exclude a false positive, you can also update the `.secretsignore` by repeating the same two
 
 During auditing, if the detected secret is actually a secret (or other sensitive information),
-remove the secret and re-commit. There is no need to update the `.secrets.baseline` file in this
+remove the secret and re-commit. There is no need to update the `.secretsignore` file in this
 case.
 
 If your commit contains a mixture of false positives and actual secrets, remove the actual secrets
-first before updating and auditing the `.secrets.baseline` file.
+first before updating and auditing the `.secretsignore` file.
 
+See https://github.com/sirwart/ripsecrets?tab=readme-ov-file#ignoring-secrets
+for how to update the `.secretsignore` file.
 
-[detect-secrets]: https://github.com/Yelp/detect-secrets
-[detect-secrets-plugins]: https://github.com/Yelp/detect-secrets#currently-supported-plugins
 
 ---
 
