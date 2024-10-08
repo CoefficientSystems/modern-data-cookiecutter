@@ -6,7 +6,7 @@
   "repo_name": "{{ cookiecutter.project_name.lower().replace(' ', '-') }}",
   "package_name": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
   "virtualenv": "{{ cookiecutter.project_name.lower().replace(' ', '-') }}",
-  "python_version": "3.12.1",
+  "python_version": "3.12.7",
   "version": "0.1.0",
   "line_length": "100",
   "use_towncrier": "y",
