@@ -119,7 +119,7 @@ jobs:
       # TODO: This can be replaced I think with actions/setup-python?
 
       - name: Install pyenv
-        uses: gabrielfalcao/pyenv-action@91f80eb59affae16a948d6ace29b1fada06d8e4c # https://github.com/gabrielfalcao/pyenv-action/pull/441
+        uses: gabrielfalcao/pyenv-action@8d7b50f6b61701fd522ee50a67d4d4973f806e10 # https://github.com/gabrielfalcao/pyenv-action/pull/441
         with:
           default: ${{ env.cc_python_version }}
 
