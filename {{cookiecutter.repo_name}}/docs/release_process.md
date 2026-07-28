@@ -35,18 +35,18 @@ git flow release start VERSION
 # Towncrier update
 # - Review all towncrier entries.
 # - Any missing vs issues closed within the milestone (don't forget bugs & maintenance)? Do the entries look good?
-# - (Optional) towncrier preview: `towncrier build --version=VERSION --draft`
-# - Publish towncrier update: `towncrier build --version=VERSION`
+# - (Optional) towncrier preview: `uv run towncrier build --version=VERSION --draft`
+# - Publish towncrier update: `uv run towncrier build --version=VERSION`
 # - Add any additional notes to the CHANGELOG.md as required
 
 # Update project version number
-# - This is in [poetry] section at the top of pyproject.toml
+# - This is the `version` field in the [project] section at the top of pyproject.toml
 
 # (Optional) pre-commit
 # - You shouldn't need to run pre-commit unless you've changed things manually
-# - If you're seeing changes to poetry.lock, try clearing your Poetry cache & run again
-poetry cache clear pypi --all
-pre-commit run --all-files --hook-stage=manual
+# - If you're seeing unexpected changes to uv.lock, try clearing your uv cache & run again
+uv cache clean
+uv run pre-commit run --all-files --hook-stage=manual
 
 # Commit & amend commit as required
 
@@ -78,10 +78,10 @@ git branch -D release/VERSION
 
 ## 2. GitHub Steps
 
-  - Copy the **raw markdown** for the release notes in CHANGELOG: [https://github.com/CoefficientSystems/coefficient-cookiecutter/blob/main/CHANGELOG.md]
-  - Once you've pushed the tag, you will see it on this page: [https://github.com/CoefficientSystems/coefficient-cookiecutter/tags]
+  - Copy the **raw markdown** for the release notes in CHANGELOG: [{{ cookiecutter.repo_url }}/blob/main/CHANGELOG.md]
+  - Once you've pushed the tag, you will see it on this page: [{{ cookiecutter.repo_url }}/tags]
   - Edit the tag and add the release notes
-  - You will then see the release appear here: [https://github.com/CoefficientSystems/coefficient-cookiecutter/releases]
+  - You will then see the release appear here: [{{ cookiecutter.repo_url }}/releases]
   - This also sends an email update to anyone on the team who has subscribed containing formatted release notes.
   - Once the release is created, edit the release and assign the milestone to the release. Save changes.
 

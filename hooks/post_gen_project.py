@@ -1,11 +1,10 @@
 """Python that runs after the project is generated.
 
-Read more: https://cookiecutter.readthedocs.io/en/1.7.3/advanced/hooks.html
+Read more: https://cookiecutter.readthedocs.io/en/stable/advanced/hooks.html
 """
 
 from __future__ import annotations
 
-import logging
 import shutil
 from pathlib import Path
 
@@ -21,18 +20,19 @@ if __name__ == "__main__":
     # Copy .env.template -> .env
     shutil.copy(PROJECT_DIRECTORY / ".env.template", PROJECT_DIRECTORY / ".env")
 
+    # Remove the optional pieces the user didn't opt into. These deletions are intentionally
+    # unguarded: if one fails we want generation to abort loudly rather than hand back a
+    # half-configured project that reports success.
     if "{{ cookiecutter.use_towncrier }}" != "y":
         (PROJECT_DIRECTORY / "docs" / "using_towncrier.md").unlink()
 
     if "{{ cookiecutter.use_github_actions }}" != "y":
-        try:
-            shutil.rmtree(PROJECT_DIRECTORY / ".github" / "workflows")
-        except Exception:  # pylint: disable=broad-except
-            logging.exception("failed to delete .github/workflows")
+        shutil.rmtree(PROJECT_DIRECTORY / ".github" / "workflows")
 
-        # Don't need .github if using neither GitHub Actions nor dependabot
-        if "{{ cookiecutter.use_dependabot }}" != "y":
-            try:
-                shutil.rmtree(PROJECT_DIRECTORY / ".github")
-            except Exception:  # pylint: disable=broad-except
-                logging.exception("failed to delete .github")
+    if "{{ cookiecutter.use_dependabot }}" != "y":
+        (PROJECT_DIRECTORY / ".github" / "dependabot.yml").unlink()
+
+    # Drop the now-empty .github directory if neither GitHub Actions nor Dependabot is used.
+    github_dir = PROJECT_DIRECTORY / ".github"
+    if github_dir.is_dir() and not any(github_dir.iterdir()):
+        github_dir.rmdir()

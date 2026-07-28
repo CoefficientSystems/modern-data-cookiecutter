@@ -1,0 +1,1 @@
+Fixed the `use_dependabot` toggle: `dependabot.yml` is now removed whenever Dependabot is disabled (previously it was only removed when GitHub Actions was *also* disabled). The post-generation hook now fails loudly instead of silently continuing if a cleanup step errors.

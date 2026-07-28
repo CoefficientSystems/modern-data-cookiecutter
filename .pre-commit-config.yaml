@@ -1,5 +1,5 @@
 # Update all versions in this file by running:
-#   $ pre-commit autoupdate
+#   $ uv run pre-commit autoupdate
 minimum_pre_commit_version: 3.3.2
 default_language_version:
   python: python3.12
@@ -46,7 +46,7 @@ repos:
         args: [--fix]
 
   - repo: https://github.com/Yelp/detect-secrets
-    rev: v1.4.0
+    rev: v1.5.0
     hooks:
       - id: detect-secrets
         name: detect-secrets - Detect secrets in staged code
@@ -54,7 +54,7 @@ repos:
             "--baseline",
             ".secrets.baseline",
             # https://regex101.com/
-            "--exclude-files 'poetry\\.lock'",
+            "--exclude-files 'uv\\.lock'",
             "--exclude-files '\\.secrets\\.baseline'",
             "--exclude-files '\\.env\\.template'",
             # "--exclude-files '.*\\.ipynb$'",
@@ -65,25 +65,17 @@ repos:
         # https://pre-commit.com/#regular-expressions
         exclude: |
           (?x)^(
-              poetry\.lock|
+              uv\.lock|
               \.secrets\.baseline|
               \.env\.template
           )$
-  # - repo: https://github.com/python-poetry/poetry
-  #   rev: 1.4.0
-  #   hooks:
-  #     - id: poetry-check
-  #     - id: poetry-lock
-  #       args: ["--no-update"]
-  #     - id: poetry-export
-  #       args:
-  #         [
-  #           "-f",
-  #           "requirements.txt",
-  #           "-o",
-  #           "requirements.txt",
-  #           "--without-hashes",
-  #         ]
+
+  # Keep uv.lock in sync with pyproject.toml.
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.11.33
+    hooks:
+      - id: uv-lock
+
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: v4.0.0-alpha.8
     hooks:
@@ -95,33 +87,19 @@ repos:
     hooks:
       - id: pip-audit
         name: pip-audit
-        entry: pip-audit
+        entry: uv run pip-audit
         # Exclusions example
-        # entry: pip-audit --ignore-vuln PYSEC-2022-42974 --ignore-vuln GHSA-w596-4wvx-j9j6
+        # entry: uv run pip-audit --ignore-vuln PYSEC-2022-42974 --ignore-vuln GHSA-w596-4wvx-j9j6
         language: system
         always_run: true
         pass_filenames: false
         stages: [manual]
-      # TODO: Remove once this is resolved
-      # https://github.com/python-poetry/poetry/issues/2765
-      # https://github.com/python-poetry/poetry/issues/7075
-      - id: poetry-lock
-        name: poetry-lock
-        # entry: bash -c 'poetry lock && python add_markers.py'
-        entry: bash -c 'poetry lock --no-update'
+      # Export a requirements.txt for colleagues / deploy tooling that don't use uv.
+      - id: uv-export
+        name: uv-export (requirements.txt)
+        # Runtime dependencies only (excludes dev groups & the project itself), so the
+        # exported requirements.txt is a deploy manifest rather than the full dev env.
+        entry: uv export --format requirements-txt --no-hashes --no-emit-project --no-default-groups --quiet --output-file requirements.txt
         language: system
         always_run: true
         pass_filenames: false
-      - id: poetry-export
-        name: poetry-export
-        entry: poetry export -f requirements.txt --output requirements.txt --without-hashes
-        language: system
-        always_run: true
-        pass_filenames: false
-
-    # - id: pip-sync-dry-run
-    #     name: pip-sync-dry-run
-    #     entry: pip-sync --dry-run
-    #     language: system
-    #     always_run: true
-    #     pass_filenames: false

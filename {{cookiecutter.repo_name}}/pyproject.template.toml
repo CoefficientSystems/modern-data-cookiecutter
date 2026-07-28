@@ -1,37 +1,38 @@
 ###########
-# 📜 Poetry
+# 📦 Project metadata (PEP 621)
 ###########
-[tool.poetry]
+[project]
 name = "{{ cookiecutter.package_name }}"
 version = "{{ cookiecutter.version }}"
 description = "{{ cookiecutter.project_short_description }}"
-authors = ["{{ cookiecutter.full_name.replace('\"', '\\\"') }} <{{ cookiecutter.email }}>"]
+authors = [{ name = "{{ cookiecutter.full_name.replace('\"', '\\\"') }}", email = "{{ cookiecutter.email }}" }]
+readme = "README.md"
+requires-python = ">={{ cookiecutter.python_version }}"
 license = "UNLICENSED"
 classifiers = ["Private :: Do Not Upload"]
-packages = [
-  { include = "{{ cookiecutter.package_name }}", from = "{{ cookiecutter.package_name }}" },
-  # Add more packages here, e.g.
-  # { include = "module_name", from = "{{ cookiecutter.package_name }}" },
+dependencies = [
+  # Runtime dependencies go here (alphabetically sorted), e.g.
+  #   "pandas>=2.2",
+  # Add with `uv add <package>`.
 ]
 
-[tool.poetry.dependencies]
-python = "^{{ cookiecutter.python_version }}"
-# Everything below here is alphabetically sorted
+[tool.uv]
+# This is an application, not a library — don't build/install the project itself.
+package = false
 
-[tool.poetry.dev-dependencies]
-# Everything below here is alphabetically sorted
-detect-secrets = "1.2.0"
-ipdb = "^0.13.13"
-pip-audit = "^2.5.5"
-pre-commit = "^3.3.3"
-pytest = "^7.4.0"
-ruff = "^0.1.14"
-{% if cookiecutter.use_towncrier == 'y' -%}
-towncrier = "^22.12.0"{% endif %}
-
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+[dependency-groups]
+# Everything below here is alphabetically sorted. Add with `uv add --dev <package>`.
+dev = [
+  "detect-secrets==1.5.0",
+  "ipdb>=0.13.13",
+{% if cookiecutter.use_jupyter == 'y' %}  "ipykernel>=6.29.0",
+  "jupyterlab>=4.3.0",
+{% endif %}  "pip-audit>=2.7.3",
+  "pre-commit>=3.3.3",
+  "pytest>=7.4.0",
+  "ruff>=0.1.14",
+{% if cookiecutter.use_towncrier == 'y' %}  "towncrier>=23.11.0",
+{% endif %}]
 
 ############
 # ✅ Linters
@@ -105,11 +106,11 @@ convention = "pep257"
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
+{%- if cookiecutter.use_towncrier == 'y' %}
 
 ##############
 # 📣 Towncrier
 ##############
-{% if cookiecutter.use_towncrier == 'y' -%}
 [tool.towncrier]
 package = "{{ cookiecutter.package_name }}"
 package_dir = "."
@@ -174,4 +175,4 @@ showcontent = true
 directory = "maintenance"
 name = "Maintenance Changes"
 showcontent = true
-{% endif %}
+{%- endif %}
