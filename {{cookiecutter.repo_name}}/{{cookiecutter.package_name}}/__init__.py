@@ -1,4 +1,4 @@
-"""Generated using coefficient-cookiecutter"""
+"""Generated using modern-data-cookiecutter."""
 
 from __future__ import annotations
 

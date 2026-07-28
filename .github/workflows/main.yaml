@@ -11,174 +11,76 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Lint & test the cookiecutter template repo itself.
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    strategy:
-      matrix:
-        python-version: ["3.12"]
-
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
         with:
-          python-version: ${{ matrix.python-version }}
+          enable-cache: true
 
-      - name: Create virtualenv
-        run: |
-          which python
-          python -m venv venv
-          source venv/bin/activate
-          python -m pip install --constraint=.github/workflows/constraints.txt --upgrade pip
-          which python
-
-      - name: Set up Poetry cache
-        uses: actions/cache@v3.3.1
-        with:
-          path: venv
-          key: venv-${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}
-
-      - name: Install Poetry and Python dependencies
-        run: |
-          curl -sSL https://install.python-poetry.org | python3 -
-          poetry --version
-          poetry config virtualenvs.in-project true
-          poetry config virtualenvs.create false
-          poetry config virtualenvs.path venv
-          source venv/bin/activate
-          which python
-          poetry install --no-root
-
-      - name: Compute pre-commit cache key
-        id: pre-commit-cache
-        shell: python
-        run: |
-          import hashlib
-          import sys
-          python = "py{}.{}".format(*sys.version_info[:2])
-          payload = sys.version.encode() + sys.executable.encode()
-          digest = hashlib.sha256(payload).hexdigest()
-          result = "${{ runner.os }}-{}-{}-pre-commit".format(python, digest[:8])
-          print("::set-output name=result::{}".format(result))
+      - name: Install dependencies
+        run: uv sync
 
       - name: Restore pre-commit cache
-        uses: actions/cache@v3.3.1
+        uses: actions/cache@v4
         with:
           path: ~/.cache/pre-commit
-          key: ${{ steps.pre-commit-cache.outputs.result }}-${{ hashFiles('.pre-commit-config.yaml') }}
+          key: pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}
           restore-keys: |
-            ${{ steps.pre-commit-cache.outputs.result }}-
+            pre-commit-
 
+      # We omit --hook-stage=manual so CI does not gate on pip-audit: an upstream CVE
+      # would otherwise turn CI red with no code change. Dependabot handles vuln alerts;
+      # run `uv run pre-commit run --hook-stage=manual --all-files` locally to audit.
       - name: pre-commit
-        run: |
-          source venv/bin/activate
-          pre-commit run --hook-stage=manual --show-diff-on-failure --all-files
-
-      # - name: mypy
-      #   run: mypy .
+        run: uv run pre-commit run --show-diff-on-failure --all-files
 
       - name: pytest
-        # run: pytest --junitxml=junit.xml --cov --cov-report=term-missing:skip-covered --cov-report=xml
-        run: |
-          source venv/bin/activate
-          pytest --ignore='{{cookiecutter.repo_name}}'
+        run: uv run pytest --ignore='{{cookiecutter.repo_name}}'
 
+  # Bake the template and run the *generated* project's checks end-to-end.
   test:
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    strategy:
-      matrix:
-        python-version: [3.12]
-
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
         with:
-          python-version: ${{ matrix.python-version }}
+          enable-cache: true
 
-      - name: Install cookiecutter
+      - name: Install template dependencies
+        run: uv sync
+
+      - name: Bake the cookiecutter
+        run: uv run cookiecutter . --no-input --output-dir "${{ runner.temp }}/baked"
+
+      - name: Create the generated project's environment
+        working-directory: ${{ runner.temp }}/baked/example-project
         run: |
-          which python
-          python -m pip install --constraint=.github/workflows/constraints.txt --upgrade pip
-          python -m pip install --user cookiecutter
+          git init -q
+          git add -A
+          uv sync
 
-      - name: Initialise cookiecutter repo
+      - name: pytest (generated project)
+        working-directory: ${{ runner.temp }}/baked/example-project
+        run: uv run pytest
+
+      - name: Towncrier (generated project)
+        working-directory: ${{ runner.temp }}/baked/example-project
         run: |
-          cd ~
-          pwd
-          cookiecutter $GITHUB_WORKSPACE --no-input
-          echo "cc_python_version=$(cat ~/coefficient-project/.python-version)"
-          echo "cc_python_version=$(cat ~/coefficient-project/.python-version)" >> $GITHUB_ENV
-          echo "cc_venv=$(cat ~/coefficient-project/.venv)"
-          echo "cc_venv=$(cat ~/coefficient-project/.venv)" >> $GITHUB_ENV
+          uv run towncrier create 123.added --content "Example news fragment."
+          uv run towncrier build --version=999 --yes
+          cat CHANGELOG.md
 
-      # TODO: This can be replaced I think with actions/setup-python?
-
-      - name: Install pyenv
-        uses: gabrielfalcao/pyenv-action@91f80eb59affae16a948d6ace29b1fada06d8e4c # https://github.com/gabrielfalcao/pyenv-action/pull/441
-        with:
-          default: ${{ env.cc_python_version }}
-
-      - name: Create cookiecuttered Python environment
+      - name: pre-commit (generated project)
+        working-directory: ${{ runner.temp }}/baked/example-project
         run: |
-          cd ~/coefficient-project
-          pwd
-          pyenv local $(cat .python-version)
-          python -V
-          python -m venv $(cat .venv)
-          python -V
-          python -m pip install --upgrade pip
-
-      - name: Set up Poetry cache
-        uses: actions/cache@v3.3.1
-        with:
-          path: ${{ env.cc_venv }}
-          key: ${{ env.cc_venv }}-${{ matrix.python-version }}-${{ hashFiles('coefficient-project/poetry.lock') }}
-
-      - name: Install Poetry and Python dependencies
-        run: |
-          cd ~/coefficient-project
-          pyenv local $(cat .python-version)
-          source $(cat .venv)/bin/activate
-          curl -sSL https://install.python-poetry.org | python3 -
-          poetry --version
-          poetry config virtualenvs.in-project true
-          poetry config virtualenvs.create false
-          poetry config virtualenvs.path $(cat .venv)
-          which python
-          poetry install --no-root
-
-      - name: pytest
-        run: |
-          cd ~/coefficient-project
-          pyenv local $(cat .python-version)
-          source $(cat .venv)/bin/activate
-          pytest
-
-      - name: Towncrier
-        run: |
-          cd ~/coefficient-project
-          pyenv local $(cat .python-version)
-          source $(cat .venv)/bin/activate
-          git init
-          towncrier create 123.added --no-edit
-          towncrier build --version=999 --yes
-          less CHANGELOG.md
-
-      - name: pre-commit
-        run: |
-          cd ~/coefficient-project
-          pyenv local $(cat .python-version)
-          source $(cat .venv)/bin/activate
-          detect-secrets --verbose scan \
-            --exclude-files 'poetry\.lock' \
-            --exclude-files '\.secrets\.baseline' \
-            --exclude-files '\.env\.template' \
-            --exclude-secrets 'password|ENTER_PASSWORD_HERE|INSERT_API_KEY_HERE' \
-            --exclude-lines 'integrity=*sha' \
-            > .secrets.baseline
-          pre-commit run --hook-stage=manual --show-diff-on-failure --all-files
+          git add -A
+          uv run pre-commit run --show-diff-on-failure --all-files

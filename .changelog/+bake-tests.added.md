@@ -1,0 +1,1 @@
+Added a `pytest-cookies` test suite that bakes the template across feature-toggle combinations and asserts the generated files are correct (guards against toggle-rendering regressions and stray Jinja markers).

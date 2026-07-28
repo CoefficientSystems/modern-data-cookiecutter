@@ -14,14 +14,15 @@
     "python.analysis.extraPaths": ["{{ cookiecutter.package_name }}"],
     "python.analysis.typeCheckingMode": "off",
 
-    // Python files only
+    // Python files only (Ruff handles formatting, import sorting & lint fixes)
     "[python]": {
-        // isort on save
-        "editor.codeActionsOnSave": {"source.organizeImports": "explicit"},
-        // Stop the 'Black does not support "Format Selection"' message every
-        // time you paste something (https://stackoverflow.com/a/63612401/3279076)
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.formatOnSave": true,
         "editor.formatOnPaste": false,
-        "editor.defaultFormatter": "charliermarsh.ruff"
+        "editor.codeActionsOnSave": {
+            "source.fixAll.ruff": "explicit",
+            "source.organizeImports.ruff": "explicit"
+        }
     },
 
     // python - pytest (https://code.visualstudio.com/docs/python/testing)

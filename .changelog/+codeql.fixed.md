@@ -1,0 +1,1 @@
+Updated the CodeQL workflow to `github/codeql-action@v3` and `actions/checkout@v4` (the `@v2` actions reached end-of-life and GitHub now fails those runs), so generated projects' security scanning works.

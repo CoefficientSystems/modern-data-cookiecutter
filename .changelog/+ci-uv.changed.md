@@ -1,0 +1,1 @@
+Rebuilt CI on `astral-sh/setup-uv` (removing the pyenv/Poetry bootstrap, `constraints.txt` and the deprecated `::set-output`). pip-audit is no longer a CI gate (Dependabot covers vulnerability alerts); run it locally via `uv run pre-commit run --hook-stage=manual`.

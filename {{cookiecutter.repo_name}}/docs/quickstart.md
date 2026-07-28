@@ -1,56 +1,32 @@
 # Quickstart
 
-This document contains instructions _only_ to get a fully working development environment for
-running this repo. For pre-requisites (e.g. `pyenv` install instructions) plus details on what's
-being installed and why, please see [docs/getting_started.md](docs/getting_started.md).
+This document contains instructions _only_ to get a fully working development environment for this
+repo. For prerequisites (e.g. how to install uv) plus details on what's being installed and why,
+please see [docs/getting_started.md](getting_started.md).
 
-We assume the following are installed and configured:
-  - [pyenv](https://github.com/pyenv/pyenv)
-  - [pyenv-virtualenvwrapper](https://github.com/pyenv/pyenv-virtualenvwrapper)
-  - [Poetry](https://python-poetry.org/docs/)
-  - [zsh-autoswitch-virtualenv](https://github.com/MichaelAquilina/zsh-autoswitch-virtualenv)
-  - [direnv](https://direnv.net/)
-  - [poetry up](https://github.com/MousaZeidBaker/poetry-plugin-up)
+We assume [**uv**](https://docs.astral.sh/uv/) and (optionally) [direnv](https://direnv.net/) are
+installed.
 
 
-## Part 1: Generic Python setup
+## Part 1: Environment setup
 
 ```sh
 # Get the repo
 git clone ${REPO_GIT_URL}
+cd {{ cookiecutter.repo_name }}
 
-# Install Python
-pyenv install $(cat .python-version)
-pyenv shell $(cat .python-version)
-python -m pip install --upgrade pip
-python -m pip install virtualenvwrapper
-pyenv virtualenvwrapper
+# Install Python + create .venv + install all dependencies from uv.lock
+uv sync
 
-# Setup the virtualenv
-mkvirtualenv -p python$(cat .python-version) $(cat .venv)
-python -V
-python -m pip install --upgrade pip
+# Install the git pre-commit hooks
+uv run pre-commit install
 
-# Install dependencies with Poetry
-poetry self update
-poetry install --no-root --sync
-
-# Create templated .env for storing secrets
+# Create your .env for secrets (then edit it)
 cp .env.template .env
-direnv allow
-
-# Create and audit secrets baseline
-# N.B. Adjust the exclusions here depending on your needs (check .pre-commit-config.yaml)
-detect-secrets --verbose scan \
-    --exclude-files 'poetry\.lock' \
-    --exclude-files '\.secrets\.baseline' \
-    --exclude-files '\.env\.template' \
-    --exclude-secrets 'password|ENTER_PASSWORD_HERE|INSERT_API_KEY_HERE' \
-    --exclude-lines 'integrity=*sha' \
-    > .secrets.baseline
-
-detect-secrets audit .secrets.baseline
+direnv allow  # optional, if using direnv
 ```
+
+Run any command inside the project environment with `uv run`, e.g. `uv run pytest`.
 
 
 ## Part 2: Project-specific setup

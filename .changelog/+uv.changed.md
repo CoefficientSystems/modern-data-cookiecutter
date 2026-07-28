@@ -1,0 +1,1 @@
+Migrated Python version, virtualenv and dependency management from Poetry + pyenv + pyenv-virtualenvwrapper to [uv](https://docs.astral.sh/uv/). Generated projects now bootstrap with a single `uv sync`, with `uv.lock` as the lockfile; a `requirements.txt` is auto-exported from the lockfile for tooling that doesn't use uv.

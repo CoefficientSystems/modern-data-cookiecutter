@@ -23,6 +23,7 @@ TODO.txt
 .RData
 
 # Environment
+.venv/
 venv/
 
 # coverage

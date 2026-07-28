@@ -2,8 +2,9 @@
     "recommendations": [
         "ms-python.python",
         "ms-python.vscode-pylance",
+        "charliermarsh.ruff",
+        "tamasfe.even-better-toml",
         "esbenp.prettier-vscode",
-        "wayou.vscode-todo-highlight",
-        "bungcip.better-toml"
+        "wayou.vscode-todo-highlight"
     ]
 }
